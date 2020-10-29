@@ -25,11 +25,11 @@ To follow along with the hands-on exercises during the workshop, you need to hav
 
 | Title  | Description
 |---|---|
-| **1 - Setting up and Monitoring Cassandra** | [Instructions](## Setting up and Monitoring Cassandra)  |
-| **2 - Working with data** | [Instructions](## Working with data)  |
-| **3 - Running repairs** | [Instructions](## Running repairs)  |
-| **4 - Backing up and Restoring data** | [Instructions](## Backing up and Restoring data)  |
-| **5 - Scaling up and down** | [Instructions](## Scaling up and down)  |
+| **1 - Setting up and Monitoring Cassandra** | [Instructions](##Setting up and Monitoring Cassandra)  |
+| **2 - Working with data** | [Instructions](##Working with data)  |
+| **3 - Running repairs** | [Instructions](##Running repairs)  |
+| **4 - Backing up and Restoring data** | [Instructions](##Backing up and Restoring data)  |
+| **5 - Scaling up and down** | [Instructions](##Scaling up and down)  |
 
 ## Setting up and Monitoring Cassandra
 ## Working with data
