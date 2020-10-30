@@ -32,7 +32,23 @@ To follow along with the hands-on exercises during the workshop, you need to hav
 | **5 - Scaling up and down** | [Instructions](#Scaling-up-and-down)  |
 
 # Setting up and Monitoring Cassandra
+
+### Setup the Repo
+helm repo add datastax https://datastax.github.io/charts
+helm repo update
+
+### Helm 3 Install
+helm install cass-operator datastax/TODO
+
+TODO mess with the values.yaml
+
+helm install super-cassandra ./TODO
+
+Navagate to http://localhost:9090 to start seeing metrics
+
 # Working with data
 # Running repairs
 # Backing up and Restoring data
 # Scaling up and down
+TODO scale up and down using the helm --set peram
+TODO scale up and down using user edited values files
