@@ -27,9 +27,9 @@ To follow along with the hands-on exercises during the workshop, you need to hav
 |---|---|
 | **1 - Setting up and Monitoring Cassandra** | [Instructions](#Setting-up-and-Monitoring-Cassandra)  |
 | **2 - Working with data** | [Instructions](#Working-with-data)  |
-| **3 - Running repairs** | [Instructions](#Running-repairs)  |
-| **4 - Backing up and Restoring data** | [Instructions](#Backing-up-and-Restoring-data)  |
-| **5 - Scaling up and down** | [Instructions](#Scaling-up-and-down)  |
+| **3 - Scaling up and down** | [Instructions](#Scaling-up-and-down)  |
+| **4 - Running repairs** | [Instructions](#Running-repairs)  |
+| **5 - Backing up and Restoring data** | [Instructions](#Backing-up-and-Restoring-data)  |
 
 # Setting up and Monitoring Cassandra
 
@@ -50,9 +50,6 @@ Navagate to http://localhost:9090 to start seeing metrics
 
 ### Deploy Pet Clinic App
 https://github.com/DataStax-Academy/kubecon2020#Scaling-up-and-down
-
-# Running repairs
-# Backing up and Restoring data
 # Scaling up and down
 ### Get current running config
 For many basic config options you can change values in the values.yaml file.  Next we will scale our cluster using this method.
@@ -75,5 +72,13 @@ Run `helm get manifest k8ssandra | grep size` again
 notice the `size: 3`
 
 ### Scale the cluster down
-TODO scale down using the helm --set peram
+If there is a need to make a config change without needing to edit a file the --set flag can be used from the CLI. Run the following command
 
+`helm upgrade --set nodeCount=2`
+
+Next verify the command made the change by checking the size param from the running config 
+
+`helm get manifest k8ssandra | grep size`
+
+# Running repairs
+# Backing up and Restoring data
