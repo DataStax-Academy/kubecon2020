@@ -1,6 +1,7 @@
 # KubeCon 2020
 ##  Putting Apache Cassandra on Automatic with Kubernetes™
 
+TODO UPDATE PICTURE
 ![OK](https://github.com/DataStax-Academy/kubecon-cassandra-workshop/blob/master/3-materials/images/00-screenplay.png?raw=true)
 
 In this repository, you'll find everything for the Cassandra Kubernetes Workshop:
@@ -11,8 +12,8 @@ Feel free to bookmark this page for future reference!
 
 ## Materials and Communications
 
-* [TBD Workshop recording](https://youtu.be/nRf2M4OjGpU)
-* [TBD  Presentation](3-materials/presentation.pdf)
+* [TODO Workshop recording](https://youtu.be/nRf2M4OjGpU)
+* [TODO  Presentation](3-materials/presentation.pdf)
 * [Discord chat](https://bit.ly/cassandra-workshop)
 * [Q&A: community.datastax.com](https://community.datastax.com)
 
@@ -50,6 +51,7 @@ Navagate to http://localhost:9090 to start seeing metrics
 # 2. Working with data
 
 ### Deploy Pet Clinic App
+TODO 
 https://github.com/DataStax-Academy/kubecon2020#Scaling-up-and-down
 
 
@@ -95,5 +97,6 @@ helm get manifest k8ssandra | grep size
 Notice the `size: 2` in the output again.
 
 # 4. Running repairs
-
+TODO
 # 5. Backing up and Restoring data
+TODO
