@@ -25,13 +25,13 @@ To follow along with the hands-on exercises during the workshop, you need to hav
 
 | Title  | Description
 |---|---|
-| **1 - Setting up and Monitoring Cassandra** | [Instructions](#Setting-up-and-Monitoring-Cassandra)  |
-| **2 - Working with data** | [Instructions](#Working-with-data)  |
-| **3 - Scaling up and down** | [Instructions](#Scaling-up-and-down)  |
-| **4 - Running repairs** | [Instructions](#Running-repairs)  |
-| **5 - Backing up and Restoring data** | [Instructions](#Backing-up-and-Restoring-data)  |
+| **1 - Setting up and Monitoring Cassandra** | [Instructions](#1-Setting-up-and-Monitoring-Cassandra)  |
+| **2 - Working with data** | [Instructions](#2-Working-with-data)  |
+| **3 - Scaling up and down** | [Instructions](#3-Scaling-up-and-down)  |
+| **4 - Running repairs** | [Instructions](#4-Running-repairs)  |
+| **5 - Backing up and Restoring data** | [Instructions](#5-Backing-up-and-Restoring-data)  |
 
-# Setting up and Monitoring Cassandra
+# 1. Setting up and Monitoring Cassandra
 
 ### Setup the Repo
 helm repo add datastax https://datastax.github.io/charts
@@ -46,11 +46,13 @@ helm install super-cassandra ./TODO
 
 Navagate to http://localhost:9090 to start seeing metrics
 
-# Working with data
+# 2. Working with data
 
 ### Deploy Pet Clinic App
 https://github.com/DataStax-Academy/kubecon2020#Scaling-up-and-down
-# Scaling up and down
+
+
+# 3. Scaling up and down
 ### Get current running config
 For many basic config options you can change values in the values.yaml file.  Next we will scale our cluster using this method.
 
@@ -80,5 +82,6 @@ Next verify the command made the change by checking the size param from the runn
 
 `helm get manifest k8ssandra | grep size`
 
-# Running repairs
-# Backing up and Restoring data
+# 4. Running repairs
+
+# 5. Backing up and Restoring data
