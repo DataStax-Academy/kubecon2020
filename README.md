@@ -47,6 +47,10 @@ helm install super-cassandra ./TODO
 Navagate to http://localhost:9090 to start seeing metrics
 
 # Working with data
+
+## Deploy Pet Clinic App
+https://github.com/DataStax-Academy/kubecon2020#Scaling-up-and-down
+
 # Running repairs
 # Backing up and Restoring data
 # Scaling up and down
@@ -71,8 +75,5 @@ Run `helm get manifest k8ssandra | grep size` again
 notice the `size: 3`
 
 ## Scale the cluster down
-TODO scale up and down using the helm --set peram
-TODO scale up and down using user edited values files
+TODO scale down using the helm --set peram
 
-# Deploy petclinic app
-https://github.com/DataStax-Academy/kubecon2020#Scaling-up-and-down
