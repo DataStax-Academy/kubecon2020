@@ -84,10 +84,9 @@ Next we need to apply the change.  To do this we will use the `helm upgrade` com
 
 Notice the `size: 3` in the output
 
-### Scale the cluster down
+### ✅  Scale the cluster down
 If there is a need to make a config change without needing to edit a file the --set flag can be used from the CLI. Run the following command
 
-✅  
 ```
 helm upgrade --set nodeCount=2
 helm get manifest k8ssandra | grep size
