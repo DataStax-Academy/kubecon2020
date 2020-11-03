@@ -64,7 +64,10 @@ In the command line type `helm get manifest k8ssandra` and press enter
 Notice how each of the yaml files that make up the deployment is displayed here
 
 ### ✅  Scale the cluster up
-In the command line type `helm get manifest k8ssandra | grep size` 
+In the command line type the following
+```
+helm get manifest k8ssandra | grep size
+``` 
 
 Notice the value of `size: 2` in the TODO.yaml 
 
@@ -74,20 +77,27 @@ Change the value from 2 to 3 `nodeCount: 3`
 
 Next we need to apply the change.  To do this we will use `helm upgrade`
 
-In the command line type `helm upgrade` and hit enter
+ ```
+ helm upgrade
+ helm get manifest k8ssandra | grep size
+ ``` 
 
-Run `helm get manifest k8ssandra | grep size` again
-
-notice the `size: 3`
+Notice the `size: 3` in the output
 
 ### ✅  Scale the cluster down
 If there is a need to make a config change without needing to edit a file the --set flag can be used from the CLI. Run the following command
 
-In the command line type  `helm upgrade --set nodeCount=2` and hit enter
+In the command line type the following and hit enter
+```
+helm upgrade --set nodeCount=2
+```
 
 Next verify the command made the change by checking the size param from the running config 
 
-`helm get manifest k8ssandra | grep size`
+In the command line type the following and hit enter
+```
+helm get manifest k8ssandra | grep size
+```
 
 # 4. Running repairs
 
