@@ -33,17 +33,18 @@ To follow along with the hands-on exercises during the workshop, you need to hav
 
 # 1. Setting up and Monitoring Cassandra
 
-### Setup the Repo
+### ✅  Setup the Repo
+```
 helm repo add datastax https://datastax.github.io/charts
 helm repo update
+```
 
-### Helm 3 Install
+### ✅  Helm 3 Install
+```
 helm install cass-operator datastax/TODO
+```
 
-TODO mess with the values.yaml
-
-helm install super-cassandra ./TODO
-
+### ✅  Monitor things as they come up
 Navagate to http://localhost:9090 to start seeing metrics
 
 # 2. Working with data
@@ -53,30 +54,36 @@ https://github.com/DataStax-Academy/kubecon2020#Scaling-up-and-down
 
 
 # 3. Scaling up and down
-### Get current running config
+### ✅  Get current running config
 For many basic config options you can change values in the values.yaml file.  Next we will scale our cluster using this method.
 
 First lets check what our current running values are using the `helm get manifest k8ssandra` command.  This command is used to expose all the current running values in the system. 
 
-### Scale the cluster up
-`helm get manifest k8ssandra | grep size` Notice the value of `size: 2` in the TODO.yaml 
+In the command line type `helm get manifest k8ssandra` and press enter
+
+Notice how each of the yaml files that make up the deployment is displayed here
+
+### ✅  Scale the cluster up
+In the command line type `helm get manifest k8ssandra | grep size` 
+
+Notice the value of `size: 2` in the TODO.yaml 
 
 Open the values.yaml and find the nodeCount paramater
 
-Change the value from 2 to 3
+Change the value from 2 to 3 `nodeCount: 3`
 
-`nodeCount: 3`
+Next we need to apply the change.  To do this we will use `helm upgrade`
 
-Next we need to apply the change.  To do this type `helm upgrade` in the command line
+In the command line type `helm upgrade` and hit enter
 
 Run `helm get manifest k8ssandra | grep size` again
 
 notice the `size: 3`
 
-### Scale the cluster down
+### ✅  Scale the cluster down
 If there is a need to make a config change without needing to edit a file the --set flag can be used from the CLI. Run the following command
 
-`helm upgrade --set nodeCount=2`
+In the command line type  `helm upgrade --set nodeCount=2` and hit enter
 
 Next verify the command made the change by checking the size param from the running config 
 
