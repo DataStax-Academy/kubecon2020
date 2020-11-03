@@ -50,5 +50,29 @@ Navagate to http://localhost:9090 to start seeing metrics
 # Running repairs
 # Backing up and Restoring data
 # Scaling up and down
+## Get current running config
+For many basic config options you can change values in the values.yaml file.  Next we will scale our cluster using this method.
+
+First lets check what our current running values are using the `helm get manifest k8ssandra` command.  This command is used to expose all the current running values in the system. 
+
+## Scale the cluster up
+`helm get manifest k8ssandra | grep size` Notice the value of `size: 2` in the TODO.yaml 
+
+Open the values.yaml and find the nodeCount paramater
+
+Change the value from 2 to 3
+
+`nodeCount: 3`
+
+Next we need to apply the change.  To do this type `helm upgrade` in the command line
+
+Run `helm get manifest k8ssandra | grep size` again
+
+notice the `size: 3`
+
+## Scale the cluster down
 TODO scale up and down using the helm --set peram
 TODO scale up and down using user edited values files
+
+# Deploy petclinic app
+https://github.com/DataStax-Academy/kubecon2020#Scaling-up-and-down
