@@ -52,7 +52,7 @@ Navagate to http://localhost:9090 to start seeing metrics
 
 ### Deploy Pet Clinic App
 TODO 
-https://github.com/DataStax-Academy/kubecon2020#Scaling-up-and-down
+https://github.com/spring-petclinic/spring-petclinic-reactive
 
 
 # 3. Scaling up and down
