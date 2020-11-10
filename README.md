@@ -36,13 +36,14 @@ To follow along with the hands-on exercises during the workshop, you need to hav
 
 ### ✅  Setup the Repo
 ```
-helm repo add datastax https://datastax.github.io/charts
+helm repo add k8ssandra https://helm.k8ssandra.io/
 helm repo update
 ```
 
 ### ✅  Helm 3 Install
 ```
-helm install cass-operator datastax/TODO
+helm install k8ssandra k8ssandra/k8ssandra
+helm install k8ssandra k8ssandra/k8ssandra-cluster
 ```
 
 ### ✅  Monitor things as they come up
