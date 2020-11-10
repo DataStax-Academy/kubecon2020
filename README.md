@@ -43,11 +43,11 @@ helm repo update
 ### ✅  Helm 3 Install
 ```
 helm install k8ssandra k8ssandra/k8ssandra
-helm install k8ssandra k8ssandra/k8ssandra-cluster
+helm install k8ssandra-cluster k8ssandra/k8ssandra-cluster
 ```
 
 ### ✅  Monitor things as they come up
-Navagate to http://localhost:9090 to start seeing metrics
+Navigate to http://localhost:9090 to start seeing metrics
 
 # 2. Working with data
 
