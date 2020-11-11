@@ -69,29 +69,22 @@ Notice how each of the yaml files that make up the deployment is displayed here
 ### ✅  Scale the cluster up
 In the command line type the following
 ```
-helm get manifest k8ssandra | grep size
+helm get manifest k8ssandra-cluster | grep size
 ``` 
-
-Notice the value of `size: 2` in the TODO.yaml .
-
-Open the values.yaml and find the nodeCount paramater.
-
-Change the value from 2 to 3 `nodeCount: 3`.
-
-Next we need to apply the change.  To do this we will use the `helm upgrade` command.
+Notice the size is now one. To grwo the cluster, we just need to update the size value and let kubernetes find the new state. 
 
  ```
- helm upgrade
+ helm upgrade k8ssandra-cluster k8ssandra/k8ssandra-cluster --set size=2
  helm get manifest k8ssandra | grep size
  ``` 
 
-Notice the `size: 3` in the output
+Notice the `size: 2` in the output
 
 ### ✅  Scale the cluster down
 If there is a need to make a config change without needing to edit a file the --set flag can be used from the CLI. Run the following command
 
 ```
-helm upgrade --set nodeCount=2
+helm upgrade k8ssandra-cluster k8ssandra/k8ssandra-cluster --set size=1
 helm get manifest k8ssandra | grep size
 ```
 
