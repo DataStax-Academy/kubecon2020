@@ -42,8 +42,8 @@ helm repo update
 
 ### ✅  Helm 3 Install
 ```
-helm install k8ssandra k8ssandra/k8ssandra
-helm install k8ssandra-cluster k8ssandra/k8ssandra-cluster
+helm install k8ssandra-tools k8ssandra/k8ssandra
+helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster
 ```
 
 ### ✅  Monitor things as they come up
@@ -71,7 +71,8 @@ In the command line type the following
 ```
 helm get manifest k8ssandra-cluster | grep size
 ``` 
-Notice the size is now one. To grwo the cluster, we just need to update the size value and let kubernetes find the new state. 
+
+Notice the size is set to one. To grow the cluster, we just need to update the size value and let kubernetes find the new state. 
 
  ```
  helm upgrade k8ssandra-cluster k8ssandra/k8ssandra-cluster --set size=2
