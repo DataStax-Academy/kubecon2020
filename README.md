@@ -83,7 +83,7 @@ Notice the value of `size: 1`.  This is the current number of cassandra nodes.  
 
 
 ```
-helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set nodeCount=3
+helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=3
 helm get manifest k8ssandra-cluster-a | grep size
 ```
 
@@ -93,7 +93,7 @@ Notice the `size: 3` in the output
 If there is a need to make a config change without needing to edit a file the --set flag can be used from the CLI. Run the following command
 
 ```
-helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set nodeCount=2
+helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=2
 helm get manifest k8ssandra-cluster-a | grep size
 ```
 
