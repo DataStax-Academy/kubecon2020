@@ -76,21 +76,16 @@ Notice how each of the yaml files that make up the deployment is displayed here
 ### ✅  Scale the cluster up
 In the command line type the following
 ```
-helm get manifest k8ssandra | grep size
+helm get manifest k8ssandra-cluster-a | grep size
 ``` 
 
-Notice the value of `size: 2` in the TODO.yaml .
+Notice the value of `size: 1`.  This is the current number of cassandra nodes.  Next we are going to scale this up to 3 nodes. 
 
-Open the values.yaml and find the nodeCount parameter.
 
-Change the value from 2 to 3 `nodeCount: 3`.
-
-Next we need to apply the change.  To do this we will use the `helm upgrade` command.
-
- ```
- helm upgrade
- helm get manifest k8ssandra | grep size
- ``` 
+```
+helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set nodeCount=3
+helm get manifest k8ssandra-cluster-a | grep size
+```
 
 Notice the `size: 3` in the output
 
@@ -98,8 +93,8 @@ Notice the `size: 3` in the output
 If there is a need to make a config change without needing to edit a file the --set flag can be used from the CLI. Run the following command
 
 ```
-helm upgrade --set nodeCount=2
-helm get manifest k8ssandra | grep size
+helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set nodeCount=2
+helm get manifest k8ssandra-cluster-a | grep size
 ```
 
 Notice the `size: 2` in the output again.
