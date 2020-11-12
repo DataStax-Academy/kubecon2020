@@ -49,6 +49,13 @@ helm install k8ssandra-cluster k8ssandra/k8ssandra-cluster
 ### ✅  Monitor things as they come up
 Navigate to http://localhost:9090 to start seeing metrics
 
+once everything is up run 
+```
+kubectl get pods
+```
+
+TODO add correct output.
+
 # 2. Working with data
 
 ### Deploy Pet Clinic App
