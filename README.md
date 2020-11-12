@@ -42,8 +42,8 @@ helm repo update
 
 ### ✅  Helm 3 Install
 ```
-helm install k8ssandra k8ssandra/k8ssandra
-helm install k8ssandra-cluster k8ssandra/k8ssandra-cluster
+helm install k8ssandra-tools k8ssandra/k8ssandra
+helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster
 ```
 
 ### ✅  Monitor things as they come up
@@ -81,7 +81,7 @@ helm get manifest k8ssandra | grep size
 
 Notice the value of `size: 2` in the TODO.yaml .
 
-Open the values.yaml and find the nodeCount paramater.
+Open the values.yaml and find the nodeCount parameter.
 
 Change the value from 2 to 3 `nodeCount: 3`.
 
