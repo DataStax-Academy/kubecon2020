@@ -1,18 +1,29 @@
 # Install Docker
-## mac
 Go to the followign address 
 https://hub.docker.com/editions/community/docker-ce-desktop-mac/
 Click the button that says get docker and run the install.
 
 Once the install is finished launch docker
-## pc
-TODO
+
 # Install Kind
 
 ## mac
 If homebrew is installed simply run 
+
+On Mac
 ```
 brew install kind
+brew install kubectl
+```
+
+On Linux
+```
+curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x ./kubectl
+mv ./kubectl /usr/local/bin/kubectl
+curl -Lo ./kind https://github.com/kubernetes-sigs/kind/releases/download/v0.7.0/kind-$(uname)-amd64
+chmod +x ./kind
+mv ./kind /usr/local/bin/kind
 ```
 
 or to install without brew simply 
@@ -30,7 +41,22 @@ chmod 700 get_helm.sh
 ./get_helm.sh
 ```
 
+## Clone App Repo
+
+```
+git clone https://github.com/DataStax-Academy/kubecon2020/
+```
+
+
 ## Start Your Kind Cluster
 ```
+cd kubecon2020
 kind create cluster --config kind-config.yaml
+```
+
+## install our ingress controller
+```
+helm repo add traefik https://helm.traefik.io/traefik
+helm repo update
+helm install traefik traefik/traefik --create-namespace -f traefik.values.yaml
 ```
