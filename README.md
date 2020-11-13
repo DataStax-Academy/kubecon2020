@@ -1,5 +1,5 @@
 # KubeCon 2020
-##  Putting Apache Cassandra on Automatic with Kubernetes™
+##  Putting Apache Cassandra&reg; on Automatic with Kubernetes™
 
 TODO UPDATE PICTURE
 ![OK](https://github.com/DataStax-Academy/kubecon-cassandra-workshop/blob/master/3-materials/images/00-screenplay.png?raw=true)
@@ -36,16 +36,18 @@ To follow along with the hands-on exercises during the workshop, you need to hav
 
 # 1. Setting up and Monitoring Cassandra
 
-### ✅  Setup the Repo
+### ✅  Set up the K8ssandra Repo
 ```
 helm repo add k8ssandra https://helm.k8ssandra.io/
 helm repo update
 ```
 
-### ✅  Helm 3 Install
+### ✅  Install K8ssandra via Helm commands
 ```
 helm install k8ssandra-tools k8ssandra/k8ssandra
-helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set ingress.traefik.enabled=true --set ingress.traefik.repair.host=repair.127.0.0.1.xip.io
+helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster \
+     --set ingress.traefik.enabled=true \
+     --set ingress.traefik.repair.host=repair.127.0.0.1.xip.io
 ```
 
 ### ✅  Monitor things as they come up
@@ -73,7 +75,6 @@ kubectl wait --namespace ingress-nginx \
   --timeout=90s
 ```
 
-
 Make sure the Cassandra Operator is initialized by trying to extract the password.
 ```
 kubectl get secret k8ssandra-superuser -o yaml | grep password | cut -d " " -f4 | base64 -d
@@ -94,13 +95,13 @@ Navigate to <YOURADDRESS>:8081/ to interact with the pet clinic app
 
 # 3. Scaling up and down
 ### ✅  Get current running config
-For many basic config options you can change values in the values.yaml file.  Next we will scale our cluster using this method.
+For many basic config options you can change values in the operator's cassdc.yaml file.  Next we will scale our cluster using this method.
 
-First lets check what our current running values are using the `helm get manifest k8ssandra` command.  This command is used to expose all the current running values in the system. 
+First let's check what our current running values are using the `helm get manifest k8ssandra` command.  This command is used to expose all the current running values in the system. 
 
-In the command line type `helm get manifest k8ssandra` and press enter
+In the command line type `helm get manifest k8ssandra` and press enter.
 
-Notice how each of the yaml files that make up the deployment is displayed here
+Notice how each of the yaml files that make up the deployment is displayed here.
 
 ### ✅  Scale the cluster up
 In the command line type the following
@@ -119,27 +120,38 @@ helm get manifest k8ssandra-cluster-a | grep size
 Notice the `size: 3` in the output
 
 ### ✅  Scale the cluster down
-If there is a need to make a config change without needing to edit a file the --set flag can be used from the CLI. Run the following command
+If there is a need to make a config change without needing to edit a file the `--set` flag can be used from the CLI. Run the following command:
 
 ```
-helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=2
+helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=1
 helm get manifest k8ssandra-cluster-a | grep size
 ```
 
-Notice the `size: 2` in the output again.
+Notice the `size: 1` in the output again.
 
 # 4. Running repairs
-Repairs are a critical anti entropy operation in Cassandra.  In the past there were many self baked solutions to manage them outside of your main Cassandra Installation.  In K8ssandra there is a tool called Reaper that will eliminate the need for a custom baked solution.  Just like K8ssandra makes Cassandra setup easy Reaper makes configuration of repairs even easier. 
+Repairs are a critical anti-entropy operation in Cassandra.  In the past there were many custom solutions to manage them outside of your main Cassandra Installation.  In K8ssandra there is a tool called Reaper that eliminates the need for a custom solution.  Just like K8ssandra makes Cassandra setup easy, Reaper makes configuration of repairs even easier. 
 
-Navigate to <YOURADDRESS>:TODO to access the Reaper UI
+Before we access the Reaper UI, look at the Traefik Ingress controller configuration. It's described in the [Reaper UI](https://k8ssandra.io/docs/topics/accessing-services/traefik/repair-ui/) topic, which links to the values.yaml file provided by k8ssandra. Recall that when we created the `k8ssandra-cluster` in a prior step, we referenced the preconfigured Traefik Ingress with --set flags:
 
-Setup a scheduled repair
+```
+helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster \
+     --set ingress.traefik.enabled=true \
+     --set ingress.traefik.repair.host=repair.127.0.0.1.xip.io
+```
 
-Exicute the repair manually 
+With that configuration running, we can point our browser to the Reaper UI. Example:
 
+http://repair.127.0.0.1.xip.io/webui
+
+The Reaper documentation illustrates common tasks you can perform in the UI:
+
+* [Check a cluster’s health](http://cassandra-reaper.io/docs/usage/health/)
+* [Run a cluster repair](http://cassandra-reaper.io/docs/usage/single/)
+* [Schedule a cluster repair](http://cassandra-reaper.io/docs/usage/schedule/)
+* [Monitor Cassandra diagnostic events](http://cassandra-reaper.io/docs/usage/cassandra-diagnostics/) (beta - looking ahead to 4.0)
 
 For more reading visit https://medium.com/rahasak/orchestrate-repairs-with-cassandra-reaper-26094bdb59f6
 
-TODO
 # 5. Backing up and Restoring data
 TODO
