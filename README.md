@@ -42,6 +42,13 @@ helm repo add k8ssandra https://helm.k8ssandra.io/
 helm repo update
 ```
 
+### Install Ingress
+```
+helm repo add traefik https://helm.traefik.io/traefik
+helm repo update
+helm install traefik traefik/traefik --create-namespace -f traefik.values.yaml
+```
+
 ### ✅  Helm 3 Install
 ```
 helm install k8ssandra-tools k8ssandra/k8ssandra
@@ -49,6 +56,7 @@ helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set ingress.traef
 ```
 
 ### ✅  Monitor things as they come up
+TODO
 Navigate to <YOURADDRESS>:9090 to start seeing metrics
 
 once everything is up run 
@@ -61,8 +69,8 @@ TODO add correct output.
 # 2. Working with data
 
 ### Deploy Pet Clinic App
-TODO 
-Pet Clinic app Github: https://github.com/spring-petclinic/spring-petclinic-reactive
+
+Pet Clinic app Github is [here](https://github.com/spring-petclinic/spring-petclinic-reactive)
 
 Install the Nginx Ingress controller
 ```
