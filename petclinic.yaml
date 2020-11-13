@@ -23,7 +23,7 @@ spec:
           - name: CASSANDRA_USER
             value: "k8ssandra-superuser"
           - name: CASSANDRA_PASSWORD
-            value: "<PUT PASSWORD HERE>"
+            value: "asdfadsfasdfdasdfds"
           - name: LISTENING_PORT
             value: "9966"
           - name: MONITORING_ENABLED
@@ -94,7 +94,8 @@ spec:
   selector:
     app: petclinic-frontend
   ports:
-  - port: 8080
+  - port: 8081
+    targetport: 8080
 ---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
@@ -107,7 +108,7 @@ spec:
       - path: /
         backend:
           serviceName: petclinic-frontend
-          servicePort: 8080
+          servicePort: 8081
       - path: /petclinic/api
         backend:
           serviceName: petclinic-backend
