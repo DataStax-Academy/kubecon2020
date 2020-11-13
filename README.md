@@ -90,7 +90,7 @@ Deploy the PetClinic app by applying the manifest.
 kubectl apply -f petclinic.yaml
 ```
 
-Navigate to <YOURADDRESS>:8080/ to interact with the pet clinic app
+Navigate to <YOURADDRESS>:8081/ to interact with the pet clinic app
 
 # 3. Scaling up and down
 ### ✅  Get current running config
@@ -131,7 +131,7 @@ Notice the `size: 2` in the output again.
 # 4. Running repairs
 Repairs are a critical anti entropy operation in Cassandra.  In the past there were many self baked solutions to manage them outside of your main Cassandra Installation.  In K8ssandra there is a tool called Reaper that will eliminate the need for a custom baked solution.  Just like K8ssandra makes Cassandra setup easy Reaper makes configuration of repairs even easier. 
 
-Navigate to <YOURADDRESS>:9000 to access the Reaper UI
+Navigate to <YOURADDRESS>:TODO to access the Reaper UI
 
 Setup a scheduled repair
 
