@@ -24,6 +24,8 @@ To follow along with the hands-on exercises during the workshop, you need to hav
 * If you are using **your own computer** or your own cloud node, please check the requirements and install the missing tools as explained [Here](https://github.com/DataStax-Academy/kubecon2020/blob/main/setup_local.md).
 * If you are using **a cloud training instance** provided by DataStax, relax as we have you covered: prerequisites are installed already. Please do the very last steps as explained [there](./0-setup-your-cluster-datastax)
 
+* IMPORTANT NOTE.  Everywhere in this repo you see <YOURADDRESS> replace with the URL for the instance you were given 
+
 | Title  | Description
 |---|---|
 | **1 - Setting up and Monitoring Cassandra** | [Instructions](#1-Setting-up-and-Monitoring-Cassandra)  |
@@ -43,11 +45,11 @@ helm repo update
 ### ✅  Helm 3 Install
 ```
 helm install k8ssandra-tools k8ssandra/k8ssandra
-helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster
+helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set ingress.traefik.enabled=true --set ingress.traefik.repair.host=repair.127.0.0.1.xip.io
 ```
 
 ### ✅  Monitor things as they come up
-Navigate to http://localhost:9090 to start seeing metrics
+Navigate to <YOURADDRESS>:9090 to start seeing metrics
 
 once everything is up run 
 ```
@@ -100,6 +102,13 @@ helm get manifest k8ssandra-cluster-a | grep size
 Notice the `size: 2` in the output again.
 
 # 4. Running repairs
+Repairs are a critical anti entropy operation in Cassandra.  In the past there were many self baked solutions to manage them outside of your main Cassandra Installation.  In K8ssandra there is a tool called Reaper that will eliminate the need for a custom baked solution.  Just like K8ssandra makes Cassandra setup easy Reaper makes configuration of repairs even easier. 
+
+Navigate to <YOURADDRESS>:9000 to access the Reaper UI
+
+
+For more reading visit https://medium.com/rahasak/orchestrate-repairs-with-cassandra-reaper-26094bdb59f6
+
 TODO
 # 5. Backing up and Restoring data
 TODO
