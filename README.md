@@ -62,8 +62,35 @@ TODO add correct output.
 
 ### Deploy Pet Clinic App
 TODO 
-https://github.com/spring-petclinic/spring-petclinic-reactive
+Pet Clinic app Github: https://github.com/spring-petclinic/spring-petclinic-reactive
 
+Install the Nginx Ingress controller
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml
+kubectl wait --namespace ingress-nginx \
+  --for=condition=ready pod \
+  --selector=app.kubernetes.io/component=controller \
+  --timeout=90s
+```
+
+
+Make sure the Cassandra Operator is initialized by trying to extract the password.
+```
+kubectl get secret k8ssandra-superuser -o yaml | grep password | cut -d " " -f4 | base64 -d
+```
+If this command returns an error, wait a few seconds and try it again until you see the random password.
+
+Add the Cassandra password to the PetClinic manifest by running the following sed script.
+```
+sed -i "s/asdfadsfasdfdasdfds/$(kubectl get secret k8ssandra-superuser -o yaml | grep password | cut -d " " -f4 | base64 -d)/g" petclinic.yaml
+```
+
+Deploy the PetClinic app by applying the manifest.
+```
+kubectl apply -f petclinic.yaml
+```
+
+Navigate to <YOURADDRESS>:8080/ to interact with the pet clinic app
 
 # 3. Scaling up and down
 ### ✅  Get current running config
@@ -105,6 +132,10 @@ Notice the `size: 2` in the output again.
 Repairs are a critical anti entropy operation in Cassandra.  In the past there were many self baked solutions to manage them outside of your main Cassandra Installation.  In K8ssandra there is a tool called Reaper that will eliminate the need for a custom baked solution.  Just like K8ssandra makes Cassandra setup easy Reaper makes configuration of repairs even easier. 
 
 Navigate to <YOURADDRESS>:9000 to access the Reaper UI
+
+Setup a scheduled repair
+
+Exicute the repair manually 
 
 
 For more reading visit https://medium.com/rahasak/orchestrate-repairs-with-cassandra-reaper-26094bdb59f6
