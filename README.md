@@ -35,6 +35,7 @@ To follow along with the hands-on exercises during the workshop, you need to hav
 | **5 - Backing up and Restoring data** | [Instructions](#5-Backing-up-and-Restoring-data)  |
 
 # 1. Setting up and Monitoring Cassandra
+First things first.  Helm is kind of like a high power package manager for Kubernetes.  In order to use the packages for todays workshop we will need to first add the correct repositories for helm to use.
 
 ### ✅  Setup the Repo
 ```
@@ -42,6 +43,7 @@ helm repo add k8ssandra https://helm.k8ssandra.io/
 helm repo update
 ```
 
+In Kubernetes network ports and services are most often handled by an Ingress controller. For todays lab the K8ssandra side of things will be using traefik.  Let's install that now.
 ### ✅  Install Ingress
 ```
 helm repo add traefik https://helm.traefik.io/traefik
@@ -49,28 +51,28 @@ helm repo update
 helm install traefik traefik/traefik --create-namespace -f traefik.values.yaml
 ```
 
+Finally the step we have been waiting for lets install our Cassandra by running a helm install of K8ssandra.
 ### ✅  Helm 3 Install
 ```
 helm install k8ssandra-tools k8ssandra/k8ssandra
 helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set ingress.traefik.enabled=true --set ingress.traefik.repair.host=repair.127.0.0.1.xip.io
 ```
 
-### ✅  Monitor things as they come up
-TODO
-Navigate to <YOURADDRESS>:9090 to start seeing metrics
-
-once everything is up run 
+Verify everything is up running we
 ```
 kubectl get pods
 ```
-
 TODO add correct output.
+
+### ✅  Monitor your system
+It is a requirement of modern applications and systems that you can monitor them.  K8ssandra is no different and to that end provides us with build in Grafana and Prometheus.
+
+Navigate to <YOURADDRESS>:TODO for Grafana
+Navigate to <YOURADDRESS>:TODO For Prometheus
 
 # 2. Working with data
 
-### ✅  Deploy Pet Clinic App
-
-Pet Clinic app Github is [here](https://github.com/spring-petclinic/spring-petclinic-reactive) but we have forked our own version for today.  
+### ✅  Deploy Pet Clinic App 
 
 Install the Nginx Ingress controller
 ```
@@ -100,41 +102,43 @@ kubectl apply -f petclinic.yaml
 
 Navigate to <YOURADDRESS>:8081/ to interact with the pet clinic app
 
+TODO remove data
+
+TODO add data
+
+To see the original app the Pet Clinic app Github is [here](https://github.com/spring-petclinic/spring-petclinic-reactive) but we have forked our own version for today. 
+
 # 3. Scaling up and down
 ### ✅  Get current running config
 For many basic config options you can change values in the values.yaml file.  Next we will scale our cluster using this method.
 
-First lets check what our current running values are using the `helm get manifest k8ssandra` command.  This command is used to expose all the current running values in the system. 
+First lets check what our current running values are using the `helm get manifest k8ssandra-cluster-a` command.  This command is used to expose all the current running values in the system. 
 
-In the command line type `helm get manifest k8ssandra` and press enter
+In the command line type `helm get manifest k8ssandra-cluster-a` and press enter
 
 Notice how each of the yaml files that make up the deployment is displayed here
 
 ### ✅  Scale the cluster up
-In the command line type the following
+Filtering the output to find specific values can be done with the linux tool grep.  In order to find the current number of nodes we will run the following command.
 ```
 helm get manifest k8ssandra-cluster-a | grep size
 ``` 
-
-Notice the value of `size: 1`.  This is the current number of cassandra nodes.  Next we are going to scale this up to 3 nodes. 
-
-
+Notice the value of `size: 1`.  This is the current number of cassandra nodes.  Next we are going to scale this up to 3 nodes. While there are a few ways to make this change with Helm we will use a single line command that doesn't require any edits to files. 
 ```
 helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=3
 helm get manifest k8ssandra-cluster-a | grep size
 ```
-
 Notice the `size: 3` in the output
 
 ### ✅  Scale the cluster down
-If there is a need to make a config change without needing to edit a file the --set flag can be used from the CLI. Run the following command
+One of the historically most difficult operations with Cassandra was to scale down the cluster.  With K8ssandra's dynamic elasticity it is now just as easy as scaling up.  Let's try it now.
 
 ```
-helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=2
+helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=1
 helm get manifest k8ssandra-cluster-a | grep size
 ```
 
-Notice the `size: 2` in the output again.
+Notice the `size: 1` in the output again.
 
 # 4. Running repairs
 Repairs are a critical anti-entropy operation in Cassandra. In the past there were many custom solutions to manage them outside of your main Cassandra Installation. In K8ssandra there is a tool called Reaper that eliminates the need for a custom solution. Just like K8ssandra makes Cassandra setup easy, Reaper makes configuration of repairs even easier.
