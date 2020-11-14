@@ -12,7 +12,7 @@ Feel free to bookmark this page for future reference!
 
 ## Materials and Communications
 
-* [TODO Workshop recording](https://youtu.be/nRf2M4OjGpU)
+* [Workshop On YouTube](https://www.youtube.com/watch?v=DI1bJ1tggmk)
 * [TODO  Presentation](3-materials/presentation.pdf)
 * [Discord chat](https://bit.ly/cassandra-workshop)
 * [Q&A: community.datastax.com](https://community.datastax.com)
@@ -21,7 +21,7 @@ Feel free to bookmark this page for future reference!
 
 To follow along with the hands-on exercises during the workshop, you need to have a docker-ready machine with at least a 4-core + 8 GB RAM. **KubeCon attendees can request a training cloud instance** using [this link](https://kubecon2020.datastaxtraining.com/). Notice that training cloud instances will be available only during the workshop and to be terminated 24 hours later.
 
-* If you are using **your own computer** or your own cloud node, please check the requirements and install the missing tools as explained [Here](https://github.com/DataStax-Academy/kubecon2020/blob/main/setup_local.md).
+* If you are in our workshop we recommend using the provided cloud instance.  If you are doing this on your own using **your own computer** or your own cloud node, please check the requirements and install the missing tools as explained [Here](https://github.com/DataStax-Academy/kubecon2020/blob/main/setup_local.md).
 * If you are using **a cloud training instance** provided by DataStax, relax as we have you covered: prerequisites are installed already. Please do the very last steps as explained [there](./0-setup-your-cluster-datastax)
 
 * IMPORTANT NOTE.  Everywhere in this repo you see <YOURADDRESS> replace with the URL for the instance you were given 
@@ -42,7 +42,7 @@ helm repo add k8ssandra https://helm.k8ssandra.io/
 helm repo update
 ```
 
-### Install Ingress
+### ✅  Install Ingress
 ```
 helm repo add traefik https://helm.traefik.io/traefik
 helm repo update
@@ -68,7 +68,7 @@ TODO add correct output.
 
 # 2. Working with data
 
-### Deploy Pet Clinic App
+### ✅  Deploy Pet Clinic App
 
 Pet Clinic app Github is [here](https://github.com/spring-petclinic/spring-petclinic-reactive) but we have forked our own version for today.  
 
@@ -139,7 +139,7 @@ Notice the `size: 2` in the output again.
 # 4. Running repairs
 Repairs are a critical anti-entropy operation in Cassandra. In the past there were many custom solutions to manage them outside of your main Cassandra Installation. In K8ssandra there is a tool called Reaper that eliminates the need for a custom solution. Just like K8ssandra makes Cassandra setup easy, Reaper makes configuration of repairs even easier.
 
-## Check a cluster’s health
+### ✅  Check a cluster’s health
 Navigate to the url TODO 
 
 Notice way that the nodes are displayed inside the datacenter inside the cluster.
@@ -148,7 +148,7 @@ TODO NEED PICTURE
 
 The color of the nodes indicates the overall load the nodes are experiencing at the current moment. 
 
-## Schedule a cluster repair
+### ✅  Schedule a cluster repair
 On the left hand side notice the schedule menu option.
 
 TODO NEED PICTURE
@@ -159,7 +159,7 @@ TODO VERIFY STEPS
 
 Notice the new repair added to the list.
 
-## Run a cluster repair
+### ✅  Run a cluster repair
 On the repair job you just configured click the run now button.  
 
 TODO NEED PICTURE
@@ -169,6 +169,5 @@ Notice the repair job kicking off.
 
 For more reading on reaper visit [this link](https://medium.com/rahasak/orchestrate-repairs-with-cassandra-reaper-26094bdb59f6)
 
-TODO
 # 5. Backing up and Restoring data
 TODO
