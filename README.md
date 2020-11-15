@@ -67,8 +67,8 @@ TODO add correct output.
 ### ✅  Monitor your system
 It is a requirement of modern applications and systems that you can monitor them.  K8ssandra is no different and to that end provides us with build in Grafana and Prometheus.
 
-Navigate to <YOURADDRESS>:TODO for Grafana
-Navigate to <YOURADDRESS>:TODO For Prometheus
+Navigate to <YOURADDRESS>:3000 for Grafana
+Navigate to <YOURADDRESS>:9090 For Prometheus
 
 # 2. Working with data
 
@@ -102,7 +102,10 @@ kubectl apply -f petclinic.yaml
 
 Navigate to <YOURADDRESS>:8081/ to interact with the pet clinic app
 
-TODO remove data
+Click on the pet types tab at the top of the page
+
+![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/petclinic1.png)
+
 
 TODO add data
 
@@ -143,7 +146,7 @@ Notice the `size: 1` in the output again.
 # 4. Running repairs
 Repairs are a critical anti-entropy operation in Cassandra. In the past there were many custom solutions to manage them outside of your main Cassandra Installation. In K8ssandra there is a tool called Reaper that eliminates the need for a custom solution. Just like K8ssandra makes Cassandra setup easy, Reaper makes configuration of repairs even easier.
 
-### ✅  Check a cluster’s health
+### ✅  Check the cluster’s health
 Navigate to the url TODO 
 
 Notice way that the nodes are displayed inside the datacenter inside the cluster.
