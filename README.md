@@ -51,7 +51,7 @@ helm install traefik traefik/traefik --create-namespace -f traefik.values.yaml
 ```
 
 Finally, the step we have been waiting for. Lets install our Cassandra by running a helm install of K8ssandra.
-### ✅  Helm 3 Install
+### ✅  Use Helm to Install K8ssandra
 ```
 helm install k8ssandra-tools k8ssandra/k8ssandra
 helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set ingress.traefik.enabled=true --set ingress.traefik.repair.host=repair.127.0.0.1.xip.io
