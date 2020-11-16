@@ -118,7 +118,7 @@ To see the original app the Pet Clinic app Github is [here](https://github.com/s
 
 # 3. Scaling up and down
 ### ✅  Get current running config
-For many basic config options you can change values in the values.yaml file.  Next we will scale our cluster using this method.
+For many basic config options you can change values in the values.yaml file.  We will not be using this method today but it is important to understand.  If you want to learn more the docs can be found [here](https://helm.sh/docs/chart_best_practices/values/)
 
 First lets check what our current running values are using the `helm get manifest k8ssandra-cluster-a` command.  This command is used to expose all the current running values in the system. 
 
