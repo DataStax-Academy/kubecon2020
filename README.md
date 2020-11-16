@@ -68,7 +68,7 @@ Modern applications and systems require that you can monitor them. K8ssandra is 
 
 To find the UI for Grafana and Prometheus use the links page in your instance and click on the corresponding Grafana and Prometheus. 
 
-If running on a local kind cluster navigate to TODO
+If running on a local kind cluster navigate to prometheus.localhost:8080 and grafana.localhost:8080 
 
 # 2. Working with Data
 
