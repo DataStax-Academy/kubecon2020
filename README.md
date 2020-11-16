@@ -18,7 +18,7 @@ Feel free to bookmark this page for future reference!
 
 ## Exercises
 
-To follow along with the hands-on exercises during the workshop, you need to have a docker-ready machine with at least a 4-core + 8 GB RAM. **KubeCon attendees can request a training cloud instance** using [this link](https://kubecon2020.datastaxtraining.com/). Notice that training cloud instances will be available only during the workshop and to be terminated 24 hours later.
+To follow along with the hands-on exercises during the workshop, you need to have a docker-ready machine with at least a 4-core + 8 GB RAM. **KubeCon attendees can request a training cloud instance** using [this link](https://kubecon2020.datastaxtraining.com/). Notice that training cloud instances will be available only during the workshop and will be terminated 24 hours later.
 
 * If you are in our workshop we recommend using the provided cloud instance.  If you are doing this on your own using **your own computer** or your own cloud node, please check the requirements and install the missing tools as explained [Here](https://github.com/DataStax-Academy/kubecon2020/blob/main/setup_local.md).
 * If you are using **a cloud training instance** provided by DataStax, relax as we have you covered: prerequisites are installed already. Please do the very last steps as explained [there](./0-setup-your-cluster-datastax)
@@ -66,8 +66,7 @@ From this command we will be able to see the pods as they come on line.  Notice 
 ### ✅  Monitor your system
 It is a requirement of modern applications and systems that you can monitor them.  K8ssandra is no different and to that end provides us with build in Grafana and Prometheus.
 
-Navigate to <YOURADDRESS>:3000 for Grafana
-Navigate to <YOURADDRESS>:9090 For Prometheus
+To find the UI for Grafana and Prometheus use the links page in your instance and click on the corisponding Grafana and Prometheus. 
 
 # 2. Working with data
 
@@ -99,15 +98,21 @@ Deploy the PetClinic app by applying the manifest.
 kubectl apply -f petclinic.yaml
 ```
 
-Navigate to <YOURADDRESS>:8081/ to interact with the pet clinic app
-
-Click on the pet types tab at the top of the page
+Navigate to the petclinic link in your cloud instance page to interact with the pet clinic app.  If you have done everything correctly you should see the following
 
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/petclinic1.png)
 
+Click on the pet types tab at the top of the page
 
-TODO delete data
-TODO add data
+![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/petclinic2.png?raw=true)
+
+Click the add button and enter a new pet type
+
+![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/petclinic4.png?raw=true)
+
+Click the delete button next to "bird"
+
+![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/petclinic5.png?raw=true)
 
 To see the original app the Pet Clinic app Github is [here](https://github.com/spring-petclinic/spring-petclinic-reactive) but we have forked our own version for today. 
 
