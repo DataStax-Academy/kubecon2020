@@ -102,7 +102,7 @@ Navigate to the petclinic link in your cloud instance page to interact with the 
 
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/petclinic1.png)
 
-Click on the pet types tab at the top of the page.
+Click on the _pet types_ tab at the top of the page.
 
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/petclinic2.png?raw=true)
 
@@ -110,7 +110,7 @@ Click the _add_ button and enter a new pet type.
 
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/petclinic4.png?raw=true)
 
-Click the delete button next to "bird".
+Click the _delete_ button next to "bird".
 
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/petclinic5.png?raw=true)
 
