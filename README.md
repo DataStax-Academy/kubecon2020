@@ -1,8 +1,7 @@
 # KubeCon 2020
 ##  Putting Apache Cassandra on Automatic with Kubernetes™
 
-TODO UPDATE PICTURE
-![OK](https://github.com/DataStax-Academy/kubecon-cassandra-workshop/blob/master/3-materials/images/00-screenplay.png?raw=true)
+![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/banner.png?raw=true)
 
 In this repository, you'll find everything for the Cassandra Kubernetes Workshop:
 - Materials used during presentations
@@ -107,6 +106,7 @@ Click on the pet types tab at the top of the page
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/petclinic1.png)
 
 
+TODO delete data
 TODO add data
 
 To see the original app the Pet Clinic app Github is [here](https://github.com/spring-petclinic/spring-petclinic-reactive) but we have forked our own version for today. 
