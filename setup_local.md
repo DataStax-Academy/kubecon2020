@@ -53,10 +53,3 @@ git clone https://github.com/DataStax-Academy/kubecon2020/
 cd kubecon2020
 kind create cluster --image kindest/node:v1.17.11 --config ./kind-config.yaml
 ```
-
-## install our ingress controller
-```
-helm repo add traefik https://helm.traefik.io/traefik
-helm repo update
-helm install traefik traefik/traefik --create-namespace -f traefik.values.yaml
-```
