@@ -157,7 +157,7 @@ Repairs are a critical anti-entropy operation in Cassandra. In the past, there h
 ### ✅  Check the cluster’s health
 Navigate to your cloud instance link list and click on reaper.
 
-If you are running this locally then navigate to repair.localhost:8080
+If you are running this locally then navigate to repair.localhost:8080/webui/
 
 Notice way that the nodes are displayed inside the datacenter for the cluster.
 
