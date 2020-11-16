@@ -53,7 +53,7 @@ Finally, the step we have been waiting for. Lets install our Cassandra by runnin
 ### ✅  Use Helm to Install K8ssandra
 ```
 helm install k8ssandra-tools k8ssandra/k8ssandra
-helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set ingress.traefik.enabled=true --set ingress.traefik.repair.host=repair.127.0.0.1.xip.io
+helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set ingress.traefik.enabled=true --set ingress.traefik.repair.host=repair.${ADDRESS}  --set ingress.traefik.monitoring.grafana.host=grafana.${ADDRESS}  --set ingress.traefik.monitoring.prometheus.host=prometheus.${ADDRESS}
 ```
 
 Verify everything is up running.
