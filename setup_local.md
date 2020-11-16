@@ -1,5 +1,5 @@
 # Install Docker
-Go to the followign address 
+Go to the following address 
 https://hub.docker.com/editions/community/docker-ce-desktop-mac/
 Click the button that says get docker and run the install.
 
@@ -51,7 +51,7 @@ git clone https://github.com/DataStax-Academy/kubecon2020/
 ## Start Your Kind Cluster
 ```
 cd kubecon2020
-kind create cluster --config kind-config.yaml
+kind create cluster --image kindest/node:v1.17.11 --config ./kind-config.yaml
 ```
 
 ## install our ingress controller
