@@ -21,19 +21,19 @@ Feel free to bookmark this page for future reference!
 To follow along with the hands-on exercises during the workshop, you need to have a docker-ready machine with at least a 4-core + 8 GB RAM. **KubeCon attendees can request a training cloud instance** using [this link](https://kubecon2020.datastaxtraining.com/). Notice that training cloud instances will be available only during the workshop and will be terminated 24 hours later.
 
 * If you are in our workshop we recommend using the provided cloud instance.  If you are doing this on your own using **your own computer** or your own cloud node, please check the requirements and install the missing tools as explained [Here](https://github.com/DataStax-Academy/kubecon2020/blob/main/setup_local.md).
-* If you are using **a cloud training instance** provided by DataStax, relax as we have you covered: prerequisites are installed already. Please do the very last steps as explained [there](./0-setup-your-cluster-datastax)
+* If you are using **a cloud training instance** provided by DataStax, relax as we have you covered: prerequisites are installed already. Please do the very last steps as explained [there](./0-setup-your-cluster-datastax).
 
-* IMPORTANT NOTE.  Everywhere in this repo you see <YOURADDRESS> replace with the URL for the instance you were given 
+* IMPORTANT NOTE.  Everywhere in this repo you see <YOURADDRESS> replace with the URL for the instance you were given.
 
 | Title  | Description
 |---|---|
-| **1 - Setting up and Monitoring Cassandra** | [Instructions](#1-Setting-up-and-Monitoring-Cassandra)  |
-| **2 - Working with data** | [Instructions](#2-Working-with-data)  |
-| **3 - Scaling up and down** | [Instructions](#3-Scaling-up-and-down)  |
-| **4 - Running repairs** | [Instructions](#4-Running-repairs)  |
-| **5 - Backing up and Restoring data** | [Instructions](#5-Backing-up-and-Restoring-data)  |
+| **1 - Setting Up and Monitoring Cassandra** | [Instructions](#1-Setting-up-and-Monitoring-Cassandra)  |
+| **2 - Working with Data** | [Instructions](#2-Working-with-data)  |
+| **3 - Scaling Up and Down** | [Instructions](#3-Scaling-up-and-down)  |
+| **4 - Running Repairs** | [Instructions](#4-Running-repairs)  |
+| **5 - Backing Up and Restoring Data** | [Instructions](#5-Backing-up-and-Restoring-data)  |
 
-# 1. Setting up and Monitoring Cassandra
+# 1. Setting Up and Monitoring Cassandra
 First things first.  Helm is kind of like a high power package manager for Kubernetes.  In order to use the packages for todays workshop we will need to first add the correct repositories for helm to use.
 
 ### ✅  Setup the Repo
@@ -42,7 +42,7 @@ helm repo add k8ssandra https://helm.k8ssandra.io/
 helm repo update
 ```
 
-In Kubernetes network ports and services are most often handled by an Ingress controller. For todays lab the K8ssandra side of things will be using traefik.  Let's install that now.
+In Kubernetes, network ports and services are most often handled by an Ingress controller. For today's lab the K8ssandra side of things will be using Traefik.  Let's install that now.
 ### ✅  Install Ingress
 ```
 helm repo add traefik https://helm.traefik.io/traefik
@@ -50,25 +50,25 @@ helm repo update
 helm install traefik traefik/traefik --create-namespace -f traefik.values.yaml
 ```
 
-Finally the step we have been waiting for lets install our Cassandra by running a helm install of K8ssandra.
+Finally, the step we have been waiting for. Lets install our Cassandra by running a helm install of K8ssandra.
 ### ✅  Helm 3 Install
 ```
 helm install k8ssandra-tools k8ssandra/k8ssandra
 helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set ingress.traefik.enabled=true --set ingress.traefik.repair.host=repair.127.0.0.1.xip.io
 ```
 
-Verify everything is up running
+Verify everything is up running.
 ```
 watch kubectl get pods
 ```
-From this command we will be able to see the pods as they come on line.  Notice the steps completing. 
+From this command we will be able to see the pods as they come on line.  Notice the steps as they complete. 
 
 ### ✅  Monitor your system
-It is a requirement of modern applications and systems that you can monitor them.  K8ssandra is no different and to that end provides us with build in Grafana and Prometheus.
+Modern applications and systems require that you can monitor them. K8ssandra is no different and to that end provides us with built-in Grafana and Prometheus.
 
-To find the UI for Grafana and Prometheus use the links page in your instance and click on the corisponding Grafana and Prometheus. 
+To find the UI for Grafana and Prometheus use the links page in your instance and click on the corresponding Grafana and Prometheus. 
 
-# 2. Working with data
+# 2. Working with Data
 
 ### ✅  Deploy Pet Clinic App 
 
@@ -98,27 +98,27 @@ Deploy the PetClinic app by applying the manifest.
 kubectl apply -f petclinic.yaml
 ```
 
-Navigate to the petclinic link in your cloud instance page to interact with the pet clinic app.  If you have done everything correctly you should see the following
+Navigate to the petclinic link in your cloud instance page to interact with the pet clinic app.  If you have done everything correctly you should see the following.
 
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/petclinic1.png)
 
-Click on the pet types tab at the top of the page
+Click on the pet types tab at the top of the page.
 
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/petclinic2.png?raw=true)
 
-Click the add button and enter a new pet type
+Click the _add_ button and enter a new pet type.
 
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/petclinic4.png?raw=true)
 
-Click the delete button next to "bird"
+Click the delete button next to "bird".
 
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/petclinic5.png?raw=true)
 
-To see the original app the Pet Clinic app Github is [here](https://github.com/spring-petclinic/spring-petclinic-reactive) but we have forked our own version for today. 
+To see the original app, the Pet Clinic app Github repo is [here](https://github.com/spring-petclinic/spring-petclinic-reactive). But, we have forked our own version for today. 
 
-# 3. Scaling up and down
+# 3. Scaling Up and Down
 ### ✅  Get current running config
-For many basic config options you can change values in the values.yaml file.  We will not be using this method today but it is important to understand.  If you want to learn more the docs can be found [here](https://helm.sh/docs/chart_best_practices/values/)
+For many basic config options you can change values in the values.yaml file.  Next we will scale our cluster using this method.
 
 First lets check what our current running values are using the `helm get manifest k8ssandra-cluster-a` command.  This command is used to expose all the current running values in the system. 
 
@@ -148,7 +148,7 @@ helm get manifest k8ssandra-cluster-a | grep size
 
 Notice the `size: 1` in the output again.
 
-# 4. Running repairs
+# 4. Running Repairs
 Repairs are a critical anti-entropy operation in Cassandra. In the past there were many custom solutions to manage them outside of your main Cassandra Installation. In K8ssandra there is a tool called Reaper that eliminates the need for a custom solution. Just like K8ssandra makes Cassandra setup easy, Reaper makes configuration of repairs even easier.
 
 ### ✅  Check the cluster’s health
@@ -181,5 +181,5 @@ Notice the repair job kicking off.
 
 For more reading on reaper visit [this link](https://medium.com/rahasak/orchestrate-repairs-with-cassandra-reaper-26094bdb59f6)
 
-# 5. Backing up and Restoring data
+# 5. Backing Up and Restoring Data
 TODO
