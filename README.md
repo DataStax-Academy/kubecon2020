@@ -57,11 +57,11 @@ helm install k8ssandra-tools k8ssandra/k8ssandra
 helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set ingress.traefik.enabled=true --set ingress.traefik.repair.host=repair.127.0.0.1.xip.io
 ```
 
-Verify everything is up running we
+Verify everything is up running
 ```
-kubectl get pods
+watch kubectl get pods
 ```
-TODO add correct output.
+From this command we will be able to see the pods as they come on line.  Notice the steps completing. 
 
 ### ✅  Monitor your system
 It is a requirement of modern applications and systems that you can monitor them.  K8ssandra is no different and to that end provides us with build in Grafana and Prometheus.
