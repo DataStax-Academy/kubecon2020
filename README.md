@@ -12,7 +12,7 @@ Feel free to bookmark this page for future reference!
 ## Materials and Communications
 
 * [Workshop On YouTube](https://www.youtube.com/watch?v=DI1bJ1tggmk)
-* [TODO  Presentation](3-materials/presentation.pdf)
+* [Presentation](https://github.com/DataStax-Academy/kubecon2020/blob/main/November%20KubeCon%20Cassandra%20Kubernetes%20Workshop.pdf)
 * [Discord chat](https://bit.ly/cassandra-workshop)
 * [Q&A: community.datastax.com](https://community.datastax.com)
 
@@ -68,7 +68,7 @@ Modern applications and systems require that you can monitor them. K8ssandra is 
 
 To find the UI for Grafana and Prometheus use the links page in your instance and click on the corresponding Grafana and Prometheus. 
 
-If running on a local kind cluster navigate to prometheus.localhost:8080 and grafana.localhost:8080 
+If running on a local kind cluster navigate to prometheus.localhost:8080/dashboard/ and grafana.localhost:8080 
 
 # 2. Working with Data
 
@@ -154,7 +154,9 @@ Notice the `size: 1` in the output again.
 Repairs are a critical anti-entropy operation in Cassandra. In the past, there have been many custom solutions to manage them outside of your main Cassandra Installation. In K8ssandra, there is a tool called Reaper that eliminates the need for a custom solution. Just like K8ssandra makes Cassandra setup easy, Reaper makes configuration of repairs even easier.
 
 ### ✅  Check the cluster’s health
-Navigate to the url TODO.
+Navigate to your cloud instance link list and click on reaper.
+
+If you are running this locally then navigate to repair.localhost:8080
 
 Notice way that the nodes are displayed inside the datacenter for the cluster.
 
@@ -169,7 +171,7 @@ TODO NEED PICTURE
 
 Click _Schedule_ and then set the time for once a week.  A Cassandra best practice is to have one repair complete per week to prevent zombie data from coming back after a deletion. 
 
-TODO VERIFY STEPS
+TODO NEED PICTURE
 
 Notice the new repair added to the list.
 
@@ -179,7 +181,6 @@ On the repair job you just configured, click the _Run now_ button.
 TODO NEED PICTURE
 
 Notice the repair job kicking off.
-
 
 For more reading on Reaper visit [this link](https://medium.com/rahasak/orchestrate-repairs-with-cassandra-reaper-26094bdb59f6)
 
