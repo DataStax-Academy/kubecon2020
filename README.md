@@ -68,6 +68,8 @@ Modern applications and systems require that you can monitor them. K8ssandra is 
 
 To find the UI for Grafana and Prometheus use the links page in your instance and click on the corresponding Grafana and Prometheus. 
 
+If running on a local kind cluster navigate to TODO
+
 # 2. Working with Data
 
 ### ✅  Deploy Pet Clinic App 
