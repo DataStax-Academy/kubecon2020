@@ -118,28 +118,28 @@ To see the original app, the Pet Clinic app Github repo is [here](https://github
 
 # 3. Scaling Up and Down
 ### ✅  Get current running config
-For many basic config options you can change values in the values.yaml file.  Next we will scale our cluster using this method.
+For many basic config options, you can change values in the _values.yaml_ file.  Next, we will scale our cluster using this method.
 
-First lets check what our current running values are using the `helm get manifest k8ssandra-cluster-a` command.  This command is used to expose all the current running values in the system. 
+First, lets check our current running values using the `helm get manifest k8ssandra-cluster-a` command.  This command exposes all the current running values in the system. 
 
-In the command line type `helm get manifest k8ssandra-cluster-a` and press enter
+In the command line, type `helm get manifest k8ssandra-cluster-a` and press enter.
 
-Notice how each of the yaml files that make up the deployment is displayed here
+Notice how each of the yaml files that make up the deployment is displayed here.
 
 ### ✅  Scale the cluster up
-Filtering the output to find specific values can be done with the linux tool grep.  In order to find the current number of nodes we will run the following command.
+We can use the linux tool _grep_ to filter the output to find specific values.  For example, to find the current number of Cassandra nodes we run the following command.
 ```
 helm get manifest k8ssandra-cluster-a | grep size
 ``` 
-Notice the value of `size: 1`.  This is the current number of cassandra nodes.  Next we are going to scale this up to 3 nodes. While there are a few ways to make this change with Helm we will use a single line command that doesn't require any edits to files. 
+Notice the value of `size: 1`.  This is the current number of cassandra nodes.  Next, we are going to scale up to three nodes. While there are a few ways to make this change with Helm, we will use a single line command that doesn't require any edits to files. 
 ```
 helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=3
 helm get manifest k8ssandra-cluster-a | grep size
 ```
-Notice the `size: 3` in the output
+Notice the `size: 3` in the output.
 
 ### ✅  Scale the cluster down
-One of the historically most difficult operations with Cassandra was to scale down the cluster.  With K8ssandra's dynamic elasticity it is now just as easy as scaling up.  Let's try it now.
+Historically, one of the most difficult operations with Cassandra has been to scale down a cluster.  With K8ssandra's dynamic elasticity, it is now just as easy as scaling up.  Let's try it!
 
 ```
 helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=1
@@ -149,37 +149,37 @@ helm get manifest k8ssandra-cluster-a | grep size
 Notice the `size: 1` in the output again.
 
 # 4. Running Repairs
-Repairs are a critical anti-entropy operation in Cassandra. In the past there were many custom solutions to manage them outside of your main Cassandra Installation. In K8ssandra there is a tool called Reaper that eliminates the need for a custom solution. Just like K8ssandra makes Cassandra setup easy, Reaper makes configuration of repairs even easier.
+Repairs are a critical anti-entropy operation in Cassandra. In the past, there have been many custom solutions to manage them outside of your main Cassandra Installation. In K8ssandra, there is a tool called Reaper that eliminates the need for a custom solution. Just like K8ssandra makes Cassandra setup easy, Reaper makes configuration of repairs even easier.
 
 ### ✅  Check the cluster’s health
-Navigate to the url TODO 
+Navigate to the url TODO.
 
-Notice way that the nodes are displayed inside the datacenter inside the cluster.
+Notice way that the nodes are displayed inside the datacenter for the cluster.
 
 TODO NEED PICTURE
 
 The color of the nodes indicates the overall load the nodes are experiencing at the current moment. 
 
 ### ✅  Schedule a cluster repair
-On the left hand side notice the schedule menu option.
+On the left hand side, notice the schedule menu option.
 
 TODO NEED PICTURE
 
-Click schedule and then set the time for once a week.  Cassandra best practise is to have one repair complete per week to prevent zombie data from coming back after a deletion. 
+Click _Schedule_ and then set the time for once a week.  A Cassandra best practice is to have one repair complete per week to prevent zombie data from coming back after a deletion. 
 
 TODO VERIFY STEPS
 
 Notice the new repair added to the list.
 
 ### ✅  Run a cluster repair
-On the repair job you just configured click the run now button.  
+On the repair job you just configured, click the _Run now_ button.  
 
 TODO NEED PICTURE
 
 Notice the repair job kicking off.
 
 
-For more reading on reaper visit [this link](https://medium.com/rahasak/orchestrate-repairs-with-cassandra-reaper-26094bdb59f6)
+For more reading on Reaper visit [this link](https://medium.com/rahasak/orchestrate-repairs-with-cassandra-reaper-26094bdb59f6)
 
 # 5. Backing Up and Restoring Data
 TODO
