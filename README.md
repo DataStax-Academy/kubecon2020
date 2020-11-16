@@ -31,7 +31,6 @@ To follow along with the hands-on exercises during the workshop, you need to hav
 | **2 - Working with Data** | [Instructions](#2-Working-with-data)  |
 | **3 - Scaling Up and Down** | [Instructions](#3-Scaling-up-and-down)  |
 | **4 - Running Repairs** | [Instructions](#4-Running-repairs)  |
-| **5 - Backing Up and Restoring Data** | [Instructions](#5-Backing-up-and-Restoring-data)  |
 
 # 1. Setting Up and Monitoring Cassandra
 First things first.  Helm is kind of like a high power package manager for Kubernetes.  In order to use the packages for todays workshop we will need to first add the correct repositories for helm to use.
@@ -183,6 +182,3 @@ TODO NEED PICTURE
 Notice the repair job kicking off.
 
 For more reading on Reaper visit [this link](https://medium.com/rahasak/orchestrate-repairs-with-cassandra-reaper-26094bdb59f6)
-
-# 5. Backing Up and Restoring Data
-TODO
