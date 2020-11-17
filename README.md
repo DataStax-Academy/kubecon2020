@@ -16,7 +16,7 @@ To follow along with the hands-on exercises during the workshop, there 2 possibi
 
 **KubeCon attendees can request a training cloud instance** using [this link](https://kubecon2020.datastaxtraining.com/).
 
-Notice that training cloud instances will be available only during the workshop and will be terminated **24 hours later.**. If you are in our workshop we recommend using the provided cloud instance, you can relax as we have you covered: prerequisites are installed already.
+Notice that training cloud instances will be available only during the workshop and will be terminated **24 hours later**. If you are in our workshop we recommend using the provided cloud instance, you can relax as we have you covered: prerequisites are installed already.
 
 **⚡ IMPORTANT NOTE:**
 Everywhere in this repo you see `<YOURADDRESS>` replace with the URL for the instance you were given.  
@@ -26,7 +26,7 @@ Everywhere in this repo you see `<YOURADDRESS>` replace with the URL for the ins
 ```
 If you are doing this on your own using **your own computer** or your own cloud node, please check the requirements and install the missing tools as explained [Here](https://github.com/DataStax-Academy/kubecon2020/blob/main/setup_local.md). You need to have a docker-ready machine with at least a 4-core + 8 GB RAM.
 
-## Table of contents and resources
+## Table of content and resources
 
 * [Workshop On YouTube](https://www.youtube.com/watch?v=DI1bJ1tggmk)
 * [Presentation](https://github.com/DataStax-Academy/kubecon2020/blob/main/November%20KubeCon%20Cassandra%20Kubernetes%20Workshop.pdf)
@@ -43,9 +43,9 @@ If you are doing this on your own using **your own computer** or your own cloud 
 
 ## 1. Setting Up and Monitoring Cassandra
 
-First things first.  Helm [documentation](https://helm.sh/docs/) is kind of like a high power package manager for Kubernetes.  In order to use the packages for todays workshop we will need to first add the correct repositories for helm to use.
+First things first.  Helm [documentation](https://helm.sh/docs/) is kind of like a high powered package manager for Kubernetes. In order to use the packages for todays workshop we will need to first add the correct repositories for helm to use.
 
-We will pull recipies from [https://helm.k8ssandra.io/](https://helm.k8ssandra.io/) where you can find all the documentation
+We will pull recipies from [https://helm.k8ssandra.io/](https://helm.k8ssandra.io/) where you can find all the documentation.
 
 **✅ Step 1a:Open you image and select the first link to go the shell** 
 
@@ -88,7 +88,7 @@ Update Complete. ⎈Happy Helming!⎈
 
 In Kubernetes, network ports and services are most often handled by an Ingress controller. 
 
-For today's lab the K8ssandra side of things will be using Traefik.  Let's install that now.
+For today's lab, the K8ssandra side of things will be using Traefik.  Let's install that now.
 
 ```bash
 helm repo add traefik https://helm.traefik.io/traefik
@@ -135,7 +135,7 @@ TEST SUITE: None
 
 **✅ Step 1g: Use Helm to Install K8ssandra**
 
-Lets install our Cassandra by running a helm install of K8ssandra. The long install command will be shortened down post release candidate as it will no longer need the ingress config specified. Start tools installation. It can take about 30s without log to install
+Lets install our Cassandra by running a helm install of K8ssandra. The long install command will be shortened down post release candidate as it will no longer need the ingress config specified. Start tools installation. It can take about 30s without log to install.
 
 ```bash
 helm install k8ssandra-tools k8ssandra/k8ssandra
@@ -199,7 +199,7 @@ Notice that `reaper-k8ssandra-schema` will error out the first time but will rec
 
 To exit watch use `Ctrl + C`
 
-From this command we will be able to see the pods as they come on line.  Notice the steps as they complete. 
+From this command we will be able to see the pods as they come online.  Notice the steps as they complete. 
 
 **✅ Step 1i: Monitor your system**
 
@@ -220,7 +220,7 @@ password: secret
 
 ## 2. Working with Data
 
-**✅ Step 2a: Add Cassandra password to manifest**
+**✅ Step 2a: Add Cassandra password to manifest **
 
 Make sure the Cassandra Operator is initialized by trying to extract the password. If this command returns an error, wait a few seconds and try it again until you see the random password.
 
@@ -300,13 +300,13 @@ To see the original app, the Pet Clinic app Github repo is [here](https://github
 
 For many basic config options, you can change values in the `values.yaml` file.  Next, we will scale our cluster using this method.
 
-Check our current running values.This command exposes all the current running values in the system. 
+Check our current running values. This command exposes all the current running values in the system. 
 
 ```
 helm get manifest k8ssandra-cluster-a
 ```
 
-Notice how each of the yaml files that make up the deployment is displayed here and there is a bunch... yeah Kubernetes is just an OCEAN of YAML. 
+Notice how each of the yaml files that make up the deployment is displayed here and there is a bunch... Yeah Kubernetes is just an OCEAN of YAML. 
 
 **✅ Step 3b: Scale the cluster up.**
 
@@ -340,7 +340,7 @@ With K8ssandra's dynamic elasticity, it is now just as easy as scaling up.  Let'
 helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=1 --set ingress.traefik.enabled=true --set ingress.traefik.repair.host=repair.${ADDRESS}  --set ingress.traefik.monitoring.grafana.host=grafana.${ADDRESS}  --set ingress.traefik.monitoring.prometheus.host=prometheus.${ADDRESS}
 ```
 
-Check the size again, it should be back to `size: a` now.
+Check the size again, it should be back to `size: 1` now.
 ```
 helm get manifest k8ssandra-cluster-a | grep size -m 1
 ```
@@ -388,16 +388,16 @@ On the repair job you just configured, click the _Run now_ button.
 
 Notice the repair job kicking off.
 
-For more reading on Reaper visit [this link](https://medium.com/rahasak/orchestrate-repairs-with-cassandra-reaper-26094bdb59f6)
+For more reading on Reaper, visit [this link](https://medium.com/rahasak/orchestrate-repairs-with-cassandra-reaper-26094bdb59f6)
 
 # # 5. Resources
 
 Well that is it for today.  In just a short time we have done what would have taken the better part of a week to do in the past thanks to the power of Kubernetes and Helm.
 
-For further learning from our team please checkout our developer site [datastax.com/dev](https://www.datastax.com/dev) where we keep many resources and hands on labs to help you improve your skills. The [Kubernetes and Cassandra page](https://www.datastax.com/dev/kubernetes) and the [cloud-native data page](https://www.datastax.com/cloud-native) are both great places to start.   
+For further learning from our team, please checkout [datastax.com/dev](datastax.com/dev) where we keep many resources and hands on labs to help you improve your skill set. 
 
-If you are interested in receiving updates on our new Cassandra on Kubernetes certification program, or becoming a Cassandra certified developer or administrator please visit [https://datastax.com/dev/certifications](https://datastax.com/dev/certifications).
+If you are looking to get certified on Cassandra, please visit [https://datastax.com/dev/certifications](https://datastax.com/dev/certifications).
 
-To get involved in the discussion around this project and others please check out [community.datastax.com](community.datastax.com).
+To get involved in the discussion around this project and others, please check out [community.datastax.com](community.datastax.com).
 
-To learn more about K8ssandra please checkout our website at [k8ssandra.io/preview](k8ssandra.io/preview) and our project github at [github.com/k8ssandra/k8ssandra](github.com/k8ssandra/k8ssandra)
+To learn more about K8ssandra, please checkout our website at [k8ssandra.io/preview](k8ssandra.io/preview) and our project github at [github.com/k8ssandra/k8ssandra](github.com/k8ssandra/k8ssandra).
