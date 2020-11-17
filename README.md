@@ -171,7 +171,7 @@ REVISION: 1
 TEST SUITE: None  
 ```
 
-If you are using your own instances then replace `_${ADDRESS}_` with `_127.0.0.1_`
+If you are using your own instances then replace `${ADDRESS}` with `127.0.0.1`
 
 Verify everything is up running.  We need to wait till everything has running or completed status before moving on. It may need up to **3 minutes** 
 
@@ -217,6 +217,17 @@ password: secret
 
 ![images](./Images/home-grafana.png)
 
+Locate the panel on the left and pick `Dashboard > Manage`. Then click the ellipsis to show the available dashboards
+![images](./Images/grafana-1.png)
+
+Cassandra Overview
+![images](./Images/grafana-2.png)
+
+Cassandra Cluster Condenses
+![images](./Images/grafana-3.png)
+
+Cassandra Node Metrics
+![images](./Images/grafana-4.png)
 
 ## 2. Working with Data
 
