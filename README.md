@@ -58,10 +58,17 @@ helm install k8ssandra-tools k8ssandra/k8ssandra
 helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set ingress.traefik.enabled=true --set ingress.traefik.repair.host=repair.${ADDRESS}  --set ingress.traefik.monitoring.grafana.host=grafana.${ADDRESS}  --set ingress.traefik.monitoring.prometheus.host=prometheus.${ADDRESS}
 ```
 
-Verify everything is up running.
+If you are using your own instances then replace _${ADDRESS}_ with _127.0.0.1_
+
+Verify everything is up running.  We need to wait till everything has running or completed status before moving on. 
 ```
 watch kubectl get pods
 ```
+
+Notice that reaper-k8ssandra-schema will error out the first time but will recover.  This is a known issue in the current pre release.
+
+To exit watch use _Ctrl + C_
+
 From this command we will be able to see the pods as they come on line.  Notice the steps as they complete. 
 
 ### ✅  Monitor your system
@@ -78,10 +85,7 @@ If running on a local kind cluster navigate to prometheus.localhost:8080/dashboa
 Install the Nginx Ingress controller
 ```
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml
-kubectl wait --namespace ingress-nginx \
-  --for=condition=ready pod \
-  --selector=app.kubernetes.io/component=controller \
-  --timeout=90s
+kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.kubernetes.io/component=controller --timeout=90s
 ```
 
 
@@ -99,6 +103,11 @@ sed -i "s/asdfadsfasdfdasdfds/$(kubectl get secret k8ssandra-superuser -o yaml |
 Deploy the PetClinic app by applying the manifest.
 ```
 kubectl apply -f petclinic.yaml
+```
+
+We can watch our app come online with the same command we used before. Just like last time use _Ctrl + C_ to exit the watch.
+```
+watch kubectl get pods
 ```
 
 Navigate to the petclinic link in your cloud instance page to interact with the pet clinic app.  If you have done everything correctly you should see the following.
@@ -132,12 +141,12 @@ Notice how each of the yaml files that make up the deployment is displayed here.
 ### ✅  Scale the cluster up
 We can use the linux tool _grep_ to filter the output to find specific values.  For example, to find the current number of Cassandra nodes we run the following command.
 ```
-helm get manifest k8ssandra-cluster-a | grep size
+helm get manifest k8ssandra-cluster-a | grep size -m 1
 ``` 
 Notice the value of `size: 1`.  This is the current number of cassandra nodes.  Next, we are going to scale up to three nodes. While there are a few ways to make this change with Helm, we will use a single line command that doesn't require any edits to files. 
 ```
 helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=3
-helm get manifest k8ssandra-cluster-a | grep size
+helm get manifest k8ssandra-cluster-a | grep size -m 1
 ```
 Notice the `size: 3` in the output.
 
@@ -146,7 +155,7 @@ Historically, one of the most difficult operations with Cassandra has been to sc
 
 ```
 helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=1
-helm get manifest k8ssandra-cluster-a | grep size
+helm get manifest k8ssandra-cluster-a | grep size -m 1
 ```
 
 Notice the `size: 1` in the output again.
