@@ -31,6 +31,7 @@ To follow along with the hands-on exercises during the workshop, you need to hav
 | **2 - Working with Data** | [Instructions](#2-Working-with-data)  |
 | **3 - Scaling Up and Down** | [Instructions](#3-Scaling-up-and-down)  |
 | **4 - Running Repairs** | [Instructions](#4-Running-repairs)  |
+| **5 - Resources** | [Instructions](#5-Resources)  |
 
 # 1. Setting Up and Monitoring Cassandra
 First things first.  Helm is kind of like a high power package manager for Kubernetes.  In order to use the packages for todays workshop we will need to first add the correct repositories for helm to use.
@@ -207,3 +208,14 @@ On the repair job you just configured, click the _Run now_ button.
 Notice the repair job kicking off.
 
 For more reading on Reaper visit [this link](https://medium.com/rahasak/orchestrate-repairs-with-cassandra-reaper-26094bdb59f6)
+
+# 5. Resources
+Well that is it for today.  In just a short time we have done what would have taken the better part of a week to do in the past thanks to the power of Kubernetes and Helm.
+
+For further learning from our team please checkout [datastax.com/dev](datastax.com/dev) where we keep many resources and hands on labs to help you improve your skill set. 
+
+If you are looking to get certified on Cassandra please visit [https://datastax.com/dev/certifications](https://datastax.com/dev/certifications).
+
+To get involved in the discussion around this project and others please check out [community.datastax.com](community.datastax.com).
+
+To learn more about K8ssandra please checkout our website at [k8ssandra.io/preview](k8ssandra.io/preview) and our project github at [github.com/k8ssandra/k8ssandra](github.com/k8ssandra/k8ssandra)
