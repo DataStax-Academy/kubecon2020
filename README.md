@@ -1,22 +1,12 @@
 # KubeCon 2020
+
 ##  Putting Apache Cassandra on Automatic with Kubernetes™
+In this repository, you'll find everything for the Cassandra Kubernetes Workshop:
+Feel free to bookmark this page for future reference!
 
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/banner.png?raw=true)
 
-In this repository, you'll find everything for the Cassandra Kubernetes Workshop:
-- Materials used during presentations
-- Hands-on exercises
-
-Feel free to bookmark this page for future reference!
-
-## Materials and Communications
-
-* [Workshop On YouTube](https://www.youtube.com/watch?v=DI1bJ1tggmk)
-* [Presentation](https://github.com/DataStax-Academy/kubecon2020/blob/main/November%20KubeCon%20Cassandra%20Kubernetes%20Workshop.pdf)
-* [Discord chat](https://bit.ly/cassandra-workshop)
-* [Q&A: community.datastax.com](https://community.datastax.com)
-
-## Exercises
+## Before starting
 
 To follow along with the hands-on exercises during the workshop, there 2 possibilities
 
@@ -28,17 +18,20 @@ To follow along with the hands-on exercises during the workshop, there 2 possibi
 
 Notice that training cloud instances will be available only during the workshop and will be terminated **24 hours later.**. If you are in our workshop we recommend using the provided cloud instance, you can relax as we have you covered: prerequisites are installed already.
 
-```diff
-! IMPORTANT NOTE: 
-Everywhere in this repo you see <YOURADDRESS>,
-replace with the URL for the instance you were given.  
-```
+**⚡ IMPORTANT NOTE:**
+Everywhere in this repo you see `<YOURADDRESS>` replace with the URL for the instance you were given.  
 
 ```diff
 + LOCALLY
 ```
-
 If you are doing this on your own using **your own computer** or your own cloud node, please check the requirements and install the missing tools as explained [Here](https://github.com/DataStax-Academy/kubecon2020/blob/main/setup_local.md). You need to have a docker-ready machine with at least a 4-core + 8 GB RAM.
+
+## Table of content and resources
+
+* [Workshop On YouTube](https://www.youtube.com/watch?v=DI1bJ1tggmk)
+* [Presentation](https://github.com/DataStax-Academy/kubecon2020/blob/main/November%20KubeCon%20Cassandra%20Kubernetes%20Workshop.pdf)
+* [Discord chat](https://bit.ly/cassandra-workshop)
+* [Q&A: community.datastax.com](https://community.datastax.com)
 
 | Title  | Description
 |---|---|
@@ -48,43 +41,42 @@ If you are doing this on your own using **your own computer** or your own cloud 
 | **4 - Running Repairs** | [Instructions](#4-Running-repairs)  |
 | **5 - Resources** | [Instructions](#5-Resources)  |
 
-# 1. Setting Up and Monitoring Cassandra
+## 1. Setting Up and Monitoring Cassandra
 
 First things first.  Helm [documentation](https://helm.sh/docs/) is kind of like a high power package manager for Kubernetes.  In order to use the packages for todays workshop we will need to first add the correct repositories for helm to use.
 
 We will pull recipies from [https://helm.k8ssandra.io/](https://helm.k8ssandra.io/) where you can find all the documentation
 
-### ✅  Setup the Repo
-
-- Open you image and select the first link to go the shell 
+**✅ Step 1a:Open you image and select the first link to go the shell** 
 
 *Credentials to use the shell*
+
 ```yaml
 Username: ec2-user
-Password datastax
+password: datastax
 ```
 
 ![images](./Images/home-shell.png)
 
-- Add the repository to `Helm`
+**✅ Step 1b: Add the repository to `Helm`** 
 
 ```bash
 helm repo add k8ssandra https://helm.k8ssandra.io/
 ```
 
-*output*
+*📃output*
 ```bash
 ec2-user@ip-172-31-5-5:~/kubernetes-workshop-online> helm repo add k8ssandra https://helm.k8ssandra.io/
 "k8ssandra" has been added to your repositories      
 ```
 
-- Update Helm
+**✅ Step 1c: Update `helm`** 
 
 ```bash
 helm repo update
 ```
 
-**Expected output**
+*📃output*
 ```
 ec2-user@ip-172-31-5-5:~/kubernetes-workshop-online> helm repo update
 Hang tight while we grab the latest from your chart repositories...                                                                                              
@@ -92,29 +84,29 @@ Hang tight while we grab the latest from your chart repositories...
 Update Complete. ⎈Happy Helming!⎈                    
 ```
 
-### ✅  Install Traefik (leveraging Ingress)
+**✅ Step 1d: Add the repository to `Traefik`(leveraging Ingress)** 
 
 In Kubernetes, network ports and services are most often handled by an Ingress controller. 
 
 For today's lab the K8ssandra side of things will be using Traefik.  Let's install that now.
 
-- Same as before, add the repository url to `Helm`
 ```bash
 helm repo add traefik https://helm.traefik.io/traefik
 ```
 
-*output*
+*📃output*
 ```bash
 ec2-user@ip-172-31-5-5:~/kubernetes-workshop-online> helm repo add traefik https://helm.traefik.io/traefik
 "traefik" has been added to your repositories  
 ```
 
-- And update
+**✅ Step 1e: Update Helm as before**
+
 ```bash
 helm repo update
 ```
 
-*output*
+>*📃output*
 ```bash
 ec2-user@ip-172-31-5-5:~/kubernetes-workshop-online> helm repo update
 Hang tight while we grab the latest from your chart repositories...                                                                                              
@@ -124,11 +116,13 @@ Update Complete. ⎈Happy Helming!⎈
 ec2-user@ip-172-31-5-5:
 ```
 
-- Finally install `traefik` with following configuration [traefik.values.yaml](traefik.values.yaml)
+**✅ Step 1f: Install `traefik` with following configuration [traefik.values.yaml](traefik.values.yaml)**
+
 ```bash
 helm install traefik traefik/traefik --create-namespace -f traefik.values.yaml
 ```
-*output*
+
+>*📃output*
 ```bash
 ec2-user@ip-172-31-5-5:~/kubernetes-workshop-online> helm install traefik traefik/traefik --create-namespace -f traefik.values.yaml
 NAME: traefik                                                                                                                                                    
@@ -139,11 +133,10 @@ REVISION: 1
 TEST SUITE: None    
 ```
 
-### ✅  Use Helm to Install K8ssandra
+**✅ Step 1g: Use Helm to Install K8ssandra
 
-Lets install our Cassandra by running a helm install of K8ssandra. The long install command will be shortened down post release candidate as it will no longer need the ingress config specified.
+Lets install our Cassandra by running a helm install of K8ssandra. The long install command will be shortened down post release candidate as it will no longer need the ingress config specified. Start tools installation. It can take about 30s without log to install
 
-- Start tools installation. It can take about 30s without log to install
 ```bash
 helm install k8ssandra-tools k8ssandra/k8ssandra
 ```
@@ -159,12 +152,13 @@ REVISION: 1
 TEST SUITE: None 
 ```
 
-- Install cluster
+**✅ Step 1h: Install a k8ssandra cluster**
+
 ```
 helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set ingress.traefik.enabled=true --set ingress.traefik.repair.host=repair.${ADDRESS} --set ingress.traefik.monitoring.grafana.host=grafana.${ADDRESS} --set ingress.traefik.monitoring.prometheus.host=prometheus.${ADDRESS}
 ```
 
-*Output*
+>*Output*
 ```
 ec2-user@ip-172-31-5-5:~/kubernetes-workshop-online> helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set ingress.traefik.enabled=true --set in
 gress.traefik.repair.host=repair.${ADDRESS} --set ingress.traefik.monitoring.grafana.host=grafana.${ADDRESS} --set ingress.traefik.monitoring.prometheus.host
@@ -207,7 +201,7 @@ To exit watch use `Ctrl + C`
 
 From this command we will be able to see the pods as they come on line.  Notice the steps as they complete. 
 
-### ✅  Monitor your system
+**✅ Step 1i: Monitor your system**
 
 Modern applications and systems require that you can monitor them. K8ssandra is no different and to that end provides us with built-in Grafana and Prometheus.
 
@@ -217,23 +211,28 @@ To find the UI for Grafana and Prometheus use the links page in your instance an
 
 If running on a local kind cluster navigate to `prometheus.localhost:8080` and `grafana.localhost:8080` 
 
-For Grafana the credentials are:
+*For Grafana the credentials are:*
 ```yaml
 username: admin
 password: secret
 ```
 
-# 2. Working with Data
+![images](./Images/home-grafana.png)
 
-### ✅  Deploy Pet Clinic App 
+
+## 2. Working with Data
+
+**✅ Step 2a: Deploy Pet Clinic App**
 
 Make sure the Cassandra Operator is initialized by trying to extract the password.
+
 ```
 kubectl get secret k8ssandra-superuser -o yaml | grep password | cut -d " " -f4 | base64 -d
 ```
-If this command returns an error, wait a few seconds and try it again until you see the random password.
 
+If this command returns an error, wait a few seconds and try it again until you see the random password.
 Add the Cassandra password to the PetClinic manifest by running the following sed script.
+
 ```
 sed -i "s/asdfadsfasdfdasdfds/$(kubectl get secret k8ssandra-superuser -o yaml | grep password | cut -d " " -f4 | base64 -d)/g" petclinic.yaml
 ```
@@ -248,27 +247,26 @@ We can watch our app come online with the same command we used before. Just like
 watch kubectl get pods
 ```
 
+**✅ Step 2b: Using PetClinic**
+
 Navigate to the petclinic link in your cloud instance page to interact with the pet clinic app.  If you have done everything correctly you should see the following.
 
-If you are using your own infrastructure navigate to localhost:8080 to see the UI
-
+*If you are using your own infrastructure navigate to localhost:8080 to see the UI*
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/petclinic1.png)
 
-Click on the _pet types_ tab at the top of the page.
-
+*Click on the _pet types_ tab at the top of the page.*
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/petclinic2.png?raw=true)
 
-Click the _add_ button and enter a new pet type.
-
+*Click the _add_ button and enter a new pet type.*
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/petclinic4.png?raw=true)
 
-Click the _delete_ button next to "bird".
-
+*Click the _delete_ button next to "bird".*
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/petclinic5.png?raw=true)
 
 To see the original app, the Pet Clinic app Github repo is [here](https://github.com/spring-petclinic/spring-petclinic-reactive). But, we have forked our own version for today. 
 
 # 3. Scaling Up and Down
+
 ### ✅  Get current running config
 For many basic config options, you can change values in the _values.yaml_ file.  Next, we will scale our cluster using this method.
 
