@@ -47,7 +47,7 @@ First things first.  Helm [documentation](https://helm.sh/docs/) is kind of like
 
 We will pull recipies from [https://helm.k8ssandra.io/](https://helm.k8ssandra.io/) where you can find all the documentation.
 
-**✅ Step 1a:Open you image and select the first link to go the shell** 
+**✅ Step 1a:Open your image and select the first link to go the shell** 
 
 *Credentials to use the shell*
 
