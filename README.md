@@ -76,7 +76,11 @@ Modern applications and systems require that you can monitor them. K8ssandra is 
 
 To find the UI for Grafana and Prometheus use the links page in your instance and click on the corresponding Grafana and Prometheus. 
 
-If running on a local kind cluster navigate to prometheus.localhost:8080/dashboard/ and grafana.localhost:8080 
+If running on a local kind cluster navigate to prometheus.localhost:8080 and grafana.localhost:8080 
+
+For Grafana the login is
+username: admin
+password: secret
 
 # 2. Working with Data
 
@@ -111,6 +115,8 @@ watch kubectl get pods
 ```
 
 Navigate to the petclinic link in your cloud instance page to interact with the pet clinic app.  If you have done everything correctly you should see the following.
+
+TODO local install To hit the UI navigate to localhost:8080
 
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/petclinic1.png)
 
