@@ -80,8 +80,8 @@ To find the UI for Grafana and Prometheus use the links page in your instance an
 If running on a local kind cluster navigate to prometheus.localhost:8080 and grafana.localhost:8080 
 
 For Grafana the login is
-username: admin
-password: secret
+username: `admin`
+password: `secret`
 
 # 2. Working with Data
 
