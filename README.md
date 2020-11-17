@@ -133,7 +133,7 @@ REVISION: 1
 TEST SUITE: None    
 ```
 
-**✅ Step 1g: Use Helm to Install K8ssandra
+**✅ Step 1g: Use Helm to Install K8ssandra**
 
 Lets install our Cassandra by running a helm install of K8ssandra. The long install command will be shortened down post release candidate as it will no longer need the ingress config specified. Start tools installation. It can take about 30s without log to install
 
@@ -141,7 +141,7 @@ Lets install our Cassandra by running a helm install of K8ssandra. The long inst
 helm install k8ssandra-tools k8ssandra/k8ssandra
 ```
 
-*output*
+>*📃output*
 ```bash
 ec2-user@ip-172-31-5-5:~/kubernetes-workshop-online> helm install k8ssandra-tools k8ssandra/k8ssandra
 NAME: k8ssandra-tools                                                                                                                                
@@ -158,7 +158,7 @@ TEST SUITE: None
 helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set ingress.traefik.enabled=true --set ingress.traefik.repair.host=repair.${ADDRESS} --set ingress.traefik.monitoring.grafana.host=grafana.${ADDRESS} --set ingress.traefik.monitoring.prometheus.host=prometheus.${ADDRESS}
 ```
 
->*Output*
+>*📃output*
 ```
 ec2-user@ip-172-31-5-5:~/kubernetes-workshop-online> helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set ingress.traefik.enabled=true --set in
 gress.traefik.repair.host=repair.${ADDRESS} --set ingress.traefik.monitoring.grafana.host=grafana.${ADDRESS} --set ingress.traefik.monitoring.prometheus.host
@@ -179,7 +179,7 @@ Verify everything is up running.  We need to wait till everything has running or
 watch kubectl get pods
 ```
 
-*output*
+>*📃output*
 ```
 Every 2.0s: kubectl get pods                                                                     ip-172-31-9-15.eu-central-1.compute.internal: Tue Nov 17 14:20:55 2020
 NAME                                                              READY   STATUS      RESTARTS   AGE                                                                   
@@ -207,8 +207,6 @@ Modern applications and systems require that you can monitor them. K8ssandra is 
 
 To find the UI for Grafana and Prometheus use the links page in your instance and click on the corresponding Grafana and Prometheus. 
 
-![images](./Images/home-grafana.png)
-
 If running on a local kind cluster navigate to `prometheus.localhost:8080` and `grafana.localhost:8080` 
 
 *For Grafana the credentials are:*
@@ -222,34 +220,65 @@ password: secret
 
 ## 2. Working with Data
 
-**✅ Step 2a: Deploy Pet Clinic App**
+**✅ Step 2a: Add Cassandra password to manifest **
 
-Make sure the Cassandra Operator is initialized by trying to extract the password.
+Make sure the Cassandra Operator is initialized by trying to extract the password. If this command returns an error, wait a few seconds and try it again until you see the random password.
 
 ```
 kubectl get secret k8ssandra-superuser -o yaml | grep password | cut -d " " -f4 | base64 -d
 ```
 
-If this command returns an error, wait a few seconds and try it again until you see the random password.
 Add the Cassandra password to the PetClinic manifest by running the following sed script.
 
 ```
 sed -i "s/asdfadsfasdfdasdfds/$(kubectl get secret k8ssandra-superuser -o yaml | grep password | cut -d " " -f4 | base64 -d)/g" petclinic.yaml
 ```
 
-Deploy the PetClinic app by applying the manifest.
+**✅ Step 2b: Deploy the PetClinic app by applying the manifest.**
+
 ```
 kubectl apply -f petclinic.yaml
 ```
 
+>*📃output*
+```
+ec2-user@ip-172-31-5-5:~/kubernetes-workshop-online> kubectl apply -f petclinic.yaml
+deployment.apps/petclinic-backend created                                                                                                   
+service/petclinic-backend created                                                                                                           
+deployment.apps/petclinic-frontend created                                                                                                  
+service/petclinic-frontend created                                                                                                          
+ingress.networking.k8s.io/petclinic-ingress created 
+```
 We can watch our app come online with the same command we used before. Just like last time use _Ctrl + C_ to exit the watch.
+
 ```
 watch kubectl get pods
 ```
 
-**✅ Step 2b: Using PetClinic**
+>*📃output*
+```
+Every 2.0s: kubectl get pods                                           ip-172-31-5-5.eu-central-1.compute.internal: Tue Nov 17 15:28:10 2020
+                                                                                                                                            
+NAME                                                              READY   STATUS      RESTARTS   AGE                                        
+cass-operator-cd9b57568-hcqc6                                     1/1     Running     0          26m                                        
+grafana-deployment-cfc94cf66-n7jk4                                1/1     Running     0          21m                                        
+k8ssandra-cluster-a-grafana-operator-k8ssandra-6466cf94c9-skzrs   1/1     Running     0          23m                                        
+k8ssandra-cluster-a-reaper-k8ssandra-59cb88b674-lh6cx             1/1     Running     0          20m                                        
+k8ssandra-cluster-a-reaper-k8ssandra-schema-2p2tp                 0/1     Completed   4          23m                                        
+k8ssandra-cluster-a-reaper-operator-k8ssandra-56cc9bf47c-9nt2l    1/1     Running     0          23m                                        
+k8ssandra-dc1-default-sts-0                                       2/2     Running     0          23m                                        
+k8ssandra-tools-kube-prome-operator-6d556b76f8-pqbmt              1/1     Running     0          26m                                        
+petclinic-backend-7d47bcc6cc-smmv7                                1/1     Running     0          59s                                        
+petclinic-frontend-75b98f7f8d-x2zgk                               1/1     Running     0          59s                                        
+prometheus-k8ssandra-cluster-a-prometheus-k8ssandra-0             2/2     Running     1          23m                                        
+traefik-7877ff76c9-rcm9n                                          1/1     Running     0          27m                                        
+```
+
+**✅ Step 2c: Using PetClinic**
 
 Navigate to the petclinic link in your cloud instance page to interact with the pet clinic app.  If you have done everything correctly you should see the following.
+
+![images](./Images/home-petclinic.png)
 
 *If you are using your own infrastructure navigate to localhost:8080 to see the UI*
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/petclinic1.png)
@@ -265,44 +294,66 @@ Navigate to the petclinic link in your cloud instance page to interact with the 
 
 To see the original app, the Pet Clinic app Github repo is [here](https://github.com/spring-petclinic/spring-petclinic-reactive). But, we have forked our own version for today. 
 
-# 3. Scaling Up and Down
+## 3. Scaling Up and Down
 
-### ✅  Get current running config
-For many basic config options, you can change values in the _values.yaml_ file.  Next, we will scale our cluster using this method.
+**✅ Step 3a: Get current running config.**
 
-First, lets check our current running values using the `helm get manifest k8ssandra-cluster-a` command.  This command exposes all the current running values in the system. 
+For many basic config options, you can change values in the `values.yaml` file.  Next, we will scale our cluster using this method.
 
-In the command line, type `helm get manifest k8ssandra-cluster-a` and press enter.
+Check our current running values.This command exposes all the current running values in the system. 
 
-Notice how each of the yaml files that make up the deployment is displayed here.
+```
+helm get manifest k8ssandra-cluster-a
+```
 
-### ✅  Scale the cluster up
-We can use the linux tool _grep_ to filter the output to find specific values.  For example, to find the current number of Cassandra nodes we run the following command.
+Notice how each of the yaml files that make up the deployment is displayed here and there is a bunch... yeah Kubernetes is just an OCEAN of YAML. 
+
+**✅ Step 3b: Scale the cluster up.**
+
+We can use the linux tool `grep` to filter the output to find specific values. To find the current number of Cassandra nodes we run the following command.
 ```
 helm get manifest k8ssandra-cluster-a | grep size -m 1
 ``` 
-Notice the value of `size: 1`.  This is the current number of cassandra nodes.  Next, we are going to scale up to three nodes. While there are a few ways to make this change with Helm, we will use a single line command that doesn't require any edits to files. 
+
+Notice output `size: 1`.  
+
+This is the current number of cassandra nodes.  Next, we are going to scale up to three nodes. 
+
+While there are a few ways to make this change with Helm, we will use a single line command that doesn't require any edits to files. 
+
 ```
 helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=3 --set ingress.traefik.enabled=true --set ingress.traefik.repair.host=repair.${ADDRESS}  --set ingress.traefik.monitoring.grafana.host=grafana.${ADDRESS}  --set ingress.traefik.monitoring.prometheus.host=prometheus.${ADDRESS}
+```
+
+Check the size again, it should be `size: 3` now
+```
 helm get manifest k8ssandra-cluster-a | grep size -m 1
 ```
-Notice the `size: 3` in the output.
 
-### ✅  Scale the cluster down
-Historically, one of the most difficult operations with Cassandra has been to scale down a cluster.  With K8ssandra's dynamic elasticity, it is now just as easy as scaling up.  Let's try it!
+**✅ Step 3c: Scale the cluster down**
+
+Historically, one of the most difficult operations with Cassandra has been to scale down a cluster.  
+
+With K8ssandra's dynamic elasticity, it is now just as easy as scaling up.  Let's try it!
 
 ```
 helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=1 --set ingress.traefik.enabled=true --set ingress.traefik.repair.host=repair.${ADDRESS}  --set ingress.traefik.monitoring.grafana.host=grafana.${ADDRESS}  --set ingress.traefik.monitoring.prometheus.host=prometheus.${ADDRESS}
+```
+
+Check the size again, it should be back to `size: a` now.
+```
 helm get manifest k8ssandra-cluster-a | grep size -m 1
 ```
 
-Notice the `size: 1` in the output again.
+## 4. Running Repairs
 
-# 4. Running Repairs
 Repairs are a critical anti-entropy operation in Cassandra. In the past, there have been many custom solutions to manage them outside of your main Cassandra Installation. In K8ssandra, there is a tool called Reaper that eliminates the need for a custom solution. Just like K8ssandra makes Cassandra setup easy, Reaper makes configuration of repairs even easier.
 
-### ✅  Check the cluster’s health
+**✅ Step 4a: Check the cluster’s health**
+
 Navigate to your cloud instance link list and click on reaper.
+
+![images](./Images/home-repear.png)
 
 If you are running this locally then navigate to repair.localhost:8080/webui/
 
@@ -312,14 +363,13 @@ Notice way that the nodes are displayed inside the datacenter for the cluster.
 
 The color of the nodes indicates the overall load the nodes are experiencing at the current moment. 
 
-### ✅  Schedule a cluster repair
-On the left hand side, notice the schedule menu option.
+**✅ Step 4b:  Schedule a cluster repair**
 
+On the left hand side, notice the schedule menu option.
 
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/reaper2.png?raw=true)
 
 Click _Schedule_
-
 
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/reaper3.png?raw=true)
 
@@ -330,9 +380,9 @@ Click _add schedule_ and fill out the details when you are done click the final 
 
 Notice the new repair added to the list.
 
-### ✅  Run a cluster repair
-On the repair job you just configured, click the _Run now_ button.  
+**✅ Step 4c:Run a cluster repair**
 
+On the repair job you just configured, click the _Run now_ button.  
 
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/reaper5.png?raw=true)
 
@@ -340,7 +390,8 @@ Notice the repair job kicking off.
 
 For more reading on Reaper visit [this link](https://medium.com/rahasak/orchestrate-repairs-with-cassandra-reaper-26094bdb59f6)
 
-# 5. Resources
+# # 5. Resources
+
 Well that is it for today.  In just a short time we have done what would have taken the better part of a week to do in the past thanks to the power of Kubernetes and Helm.
 
 For further learning from our team please checkout [datastax.com/dev](datastax.com/dev) where we keep many resources and hands on labs to help you improve your skill set. 
