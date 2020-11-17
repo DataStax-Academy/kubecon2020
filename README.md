@@ -116,7 +116,7 @@ watch kubectl get pods
 
 Navigate to the petclinic link in your cloud instance page to interact with the pet clinic app.  If you have done everything correctly you should see the following.
 
-TODO local install To hit the UI navigate to localhost:8080
+If you are using your own infrastructure navigate to localhost:8080 to see the UI
 
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/petclinic1.png)
 
@@ -176,25 +176,33 @@ If you are running this locally then navigate to repair.localhost:8080/webui/
 
 Notice way that the nodes are displayed inside the datacenter for the cluster.
 
-TODO NEED PICTURE
+![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/reaper1.png?raw=true)
 
 The color of the nodes indicates the overall load the nodes are experiencing at the current moment. 
 
 ### ✅  Schedule a cluster repair
 On the left hand side, notice the schedule menu option.
 
-TODO NEED PICTURE
 
-Click _Schedule_ and then set the time for once a week.  A Cassandra best practice is to have one repair complete per week to prevent zombie data from coming back after a deletion. 
+![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/reaper2.png?raw=true)
 
-TODO NEED PICTURE
+Click _Schedule_
+
+
+![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/reaper3.png?raw=true)
+
+Click _add schedule_ and fill out the details when you are done click the final _add schedule_ to apply the new repair job.  A Cassandra best practice is to have one repair complete per week to prevent zombie data from coming back after a deletion. 
+
+
+![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/reaper4.png?raw=true)
 
 Notice the new repair added to the list.
 
 ### ✅  Run a cluster repair
 On the repair job you just configured, click the _Run now_ button.  
 
-TODO NEED PICTURE
+
+![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/reaper5.png?raw=true)
 
 Notice the repair job kicking off.
 
