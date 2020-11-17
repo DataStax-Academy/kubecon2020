@@ -87,13 +87,6 @@ password: secret
 
 ### ✅  Deploy Pet Clinic App 
 
-Install the Nginx Ingress controller
-```
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml
-kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.kubernetes.io/component=controller --timeout=90s
-```
-
-
 Make sure the Cassandra Operator is initialized by trying to extract the password.
 ```
 kubectl get secret k8ssandra-superuser -o yaml | grep password | cut -d " " -f4 | base64 -d
