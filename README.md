@@ -145,7 +145,7 @@ helm get manifest k8ssandra-cluster-a | grep size -m 1
 ``` 
 Notice the value of `size: 1`.  This is the current number of cassandra nodes.  Next, we are going to scale up to three nodes. While there are a few ways to make this change with Helm, we will use a single line command that doesn't require any edits to files. 
 ```
-helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=3
+helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=3 --set ingress.traefik.enabled=true --set ingress.traefik.repair.host=repair.${ADDRESS}  --set ingress.traefik.monitoring.grafana.host=grafana.${ADDRESS}  --set ingress.traefik.monitoring.prometheus.host=prometheus.${ADDRESS}
 helm get manifest k8ssandra-cluster-a | grep size -m 1
 ```
 Notice the `size: 3` in the output.
@@ -154,7 +154,7 @@ Notice the `size: 3` in the output.
 Historically, one of the most difficult operations with Cassandra has been to scale down a cluster.  With K8ssandra's dynamic elasticity, it is now just as easy as scaling up.  Let's try it!
 
 ```
-helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=1
+helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=1 --set ingress.traefik.enabled=true --set ingress.traefik.repair.host=repair.${ADDRESS}  --set ingress.traefik.monitoring.grafana.host=grafana.${ADDRESS}  --set ingress.traefik.monitoring.prometheus.host=prometheus.${ADDRESS}
 helm get manifest k8ssandra-cluster-a | grep size -m 1
 ```
 
