@@ -18,12 +18,27 @@ Feel free to bookmark this page for future reference!
 
 ## Exercises
 
-To follow along with the hands-on exercises during the workshop, you need to have a docker-ready machine with at least a 4-core + 8 GB RAM. **KubeCon attendees can request a training cloud instance** using [this link](https://kubecon2020.datastaxtraining.com/). Notice that training cloud instances will be available only during the workshop and will be terminated 24 hours later. Username `ec2-user`, Password `datastax`.
+To follow along with the hands-on exercises during the workshop, there 2 possibilities
 
-* If you are in our workshop we recommend using the provided cloud instance.  If you are doing this on your own using **your own computer** or your own cloud node, please check the requirements and install the missing tools as explained [Here](https://github.com/DataStax-Academy/kubecon2020/blob/main/setup_local.md).
-* If you are using **a cloud training instance** provided by DataStax, relax as we have you covered: prerequisites are installed already.
+```diff
++ PROVIDED CLOUD INSTANCES
+```
 
-* IMPORTANT NOTE.  Everywhere in this repo you see <YOURADDRESS> replace with the URL for the instance you were given.
+**KubeCon attendees can request a training cloud instance** using [this link](https://kubecon2020.datastaxtraining.com/).
+
+Notice that training cloud instances will be available only during the workshop and will be terminated **24 hours later.**. If you are in our workshop we recommend using the provided cloud instance, you can relax as we have you covered: prerequisites are installed already.
+
+```diff
+! IMPORTANT NOTE: 
+Everywhere in this repo you see <YOURADDRESS>,
+replace with the URL for the instance you were given.  
+```
+
+```diff
++ LOCALLY
+```
+
+If you are doing this on your own using **your own computer** or your own cloud node, please check the requirements and install the missing tools as explained [Here](https://github.com/DataStax-Academy/kubecon2020/blob/main/setup_local.md). You need to have a docker-ready machine with at least a 4-core + 8 GB RAM.
 
 | Title  | Description
 |---|---|
@@ -34,54 +49,179 @@ To follow along with the hands-on exercises during the workshop, you need to hav
 | **5 - Resources** | [Instructions](#5-Resources)  |
 
 # 1. Setting Up and Monitoring Cassandra
-First things first.  Helm is kind of like a high power package manager for Kubernetes.  In order to use the packages for todays workshop we will need to first add the correct repositories for helm to use.
+
+First things first.  Helm [documentation](https://helm.sh/docs/) is kind of like a high power package manager for Kubernetes.  In order to use the packages for todays workshop we will need to first add the correct repositories for helm to use.
+
+We will pull recipies from [https://helm.k8ssandra.io/](https://helm.k8ssandra.io/) where you can find all the documentation
 
 ### ✅  Setup the Repo
+
+- Open you image and select the first link to go the shell 
+
+*Credentials to use the shell*
+```yaml
+Username: ec2-user
+Password datastax
 ```
+
+![images](./Images/home-shell.png)
+
+- Add the repository to `Helm`
+
+```bash
 helm repo add k8ssandra https://helm.k8ssandra.io/
+```
+
+*output*
+```bash
+ec2-user@ip-172-31-5-5:~/kubernetes-workshop-online> helm repo add k8ssandra https://helm.k8ssandra.io/
+"k8ssandra" has been added to your repositories      
+```
+
+- Update Helm
+
+```bash
 helm repo update
 ```
 
-In Kubernetes, network ports and services are most often handled by an Ingress controller. For today's lab the K8ssandra side of things will be using Traefik.  Let's install that now.
-### ✅  Install Ingress
+**Expected output**
 ```
+ec2-user@ip-172-31-5-5:~/kubernetes-workshop-online> helm repo update
+Hang tight while we grab the latest from your chart repositories...                                                                                              
+...Successfully got an update from the "k8ssandra" chart repository                                                                                              
+Update Complete. ⎈Happy Helming!⎈                    
+```
+
+### ✅  Install Traefik (leveraging Ingress)
+
+In Kubernetes, network ports and services are most often handled by an Ingress controller. 
+
+For today's lab the K8ssandra side of things will be using Traefik.  Let's install that now.
+
+- Same as before, add the repository url to `Helm`
+```bash
 helm repo add traefik https://helm.traefik.io/traefik
+```
+
+*output*
+```bash
+ec2-user@ip-172-31-5-5:~/kubernetes-workshop-online> helm repo add traefik https://helm.traefik.io/traefik
+"traefik" has been added to your repositories  
+```
+
+- And update
+```bash
 helm repo update
+```
+
+*output*
+```bash
+ec2-user@ip-172-31-5-5:~/kubernetes-workshop-online> helm repo update
+Hang tight while we grab the latest from your chart repositories...                                                                                              
+...Successfully got an update from the "k8ssandra" chart repository                                                                                              
+...Successfully got an update from the "traefik" chart repository                                                                                                
+Update Complete. ⎈Happy Helming!⎈                                                                                                                                
+ec2-user@ip-172-31-5-5:
+```
+
+- Finally install `traefik` with following configuration [traefik.values.yaml](traefik.values.yaml)
+```bash
 helm install traefik traefik/traefik --create-namespace -f traefik.values.yaml
 ```
+*output*
+```bash
+ec2-user@ip-172-31-5-5:~/kubernetes-workshop-online> helm install traefik traefik/traefik --create-namespace -f traefik.values.yaml
+NAME: traefik                                                                                                                                                    
+LAST DEPLOYED: Tue Nov 17 15:00:53 2020                                                                                                                          
+NAMESPACE: default                                                                                                                                               
+STATUS: deployed                                                                                                                                                 
+REVISION: 1                                                                                                                                                      
+TEST SUITE: None    
+```
 
-Finally, the step we have been waiting for. Lets install our Cassandra by running a helm install of K8ssandra.
 ### ✅  Use Helm to Install K8ssandra
-Note that the long install command will be shortened down post release candidate as it will no longer need the ingress config specified. 
 
-```
+Lets install our Cassandra by running a helm install of K8ssandra. The long install command will be shortened down post release candidate as it will no longer need the ingress config specified.
+
+- Start tools installation. It can take about 30s without log to install
+```bash
 helm install k8ssandra-tools k8ssandra/k8ssandra
-helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set ingress.traefik.enabled=true --set ingress.traefik.repair.host=repair.${ADDRESS}  --set ingress.traefik.monitoring.grafana.host=grafana.${ADDRESS}  --set ingress.traefik.monitoring.prometheus.host=prometheus.${ADDRESS}
 ```
 
-If you are using your own instances then replace _${ADDRESS}_ with _127.0.0.1_
-
-Verify everything is up running.  We need to wait till everything has running or completed status before moving on. 
+*output*
+```bash
+ec2-user@ip-172-31-5-5:~/kubernetes-workshop-online> helm install k8ssandra-tools k8ssandra/k8ssandra
+NAME: k8ssandra-tools                                                                                                                                
+LAST DEPLOYED: Tue Nov 17 15:01:22 2020                                                                                                              
+NAMESPACE: default                                                                                                                                   
+STATUS: deployed                                                                                                                                     
+REVISION: 1                                                                                                                                          
+TEST SUITE: None 
 ```
+
+- Install cluster
+```
+helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set ingress.traefik.enabled=true --set ingress.traefik.repair.host=repair.${ADDRESS} --set ingress.traefik.monitoring.grafana.host=grafana.${ADDRESS} --set ingress.traefik.monitoring.prometheus.host=prometheus.${ADDRESS}
+```
+
+*Output*
+```
+ec2-user@ip-172-31-5-5:~/kubernetes-workshop-online> helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set ingress.traefik.enabled=true --set in
+gress.traefik.repair.host=repair.${ADDRESS} --set ingress.traefik.monitoring.grafana.host=grafana.${ADDRESS} --set ingress.traefik.monitoring.prometheus.host
+=prometheus.${ADDRESS}                                                                                                                                       
+NAME: k8ssandra-cluster-a                                                                                                                                    
+LAST DEPLOYED: Tue Nov 17 15:04:56 2020                                                                                                                      
+NAMESPACE: default                                                                                                                                           
+STATUS: deployed                                                                                                                                             
+REVISION: 1                                                                                                                                                  
+TEST SUITE: None  
+```
+
+If you are using your own instances then replace `_${ADDRESS}_` with `_127.0.0.1_`
+
+Verify everything is up running.  We need to wait till everything has running or completed status before moving on. It may need up to **3 minutes** 
+
+```bash
 watch kubectl get pods
 ```
 
-Notice that reaper-k8ssandra-schema will error out the first time but will recover.  This is a known issue in the current pre release.
+*output*
+```
+Every 2.0s: kubectl get pods                                                                     ip-172-31-9-15.eu-central-1.compute.internal: Tue Nov 17 14:20:55 2020
+NAME                                                              READY   STATUS      RESTARTS   AGE                                                                   
+cass-operator-cd9b57568-2fck2                                     1/1     Running     0          4m27s                                                                 
+grafana-deployment-cfc94cf66-j8mw5                                1/1     Running     0          116s                                                                  
+k8ssandra-cluster-a-grafana-operator-k8ssandra-6466cf94c9-vv6vl   1/1     Running     0          3m38s                                                                 
+k8ssandra-cluster-a-reaper-k8ssandra-59cb88b674-wmb74             1/1     Running     0          75s                                                                   
+k8ssandra-cluster-a-reaper-k8ssandra-schema-gsl64                 0/1     Completed   4          3m31s                                                                 
+k8ssandra-cluster-a-reaper-operator-k8ssandra-56cc9bf47c-9ghsl    1/1     Running     0          3m38s                                                                 
+k8ssandra-dc1-default-sts-0                                       2/2     Running     0          3m36s                                                                 
+k8ssandra-tools-kube-prome-operator-6d556b76f8-5h54b              1/1     Running     0          4m27s                                                                 
+prometheus-k8ssandra-cluster-a-prometheus-k8ssandra-0             2/2     Running     1          3m38s                                                                 
+traefik-7877ff76c9-hpb97                                          1/1     Running     0          5m5s     
+```
 
-To exit watch use _Ctrl + C_
+Notice that `reaper-k8ssandra-schema` will error out the first time but will recover. This is a known "issue", in the current pre-release.
+
+To exit watch use `Ctrl + C`
 
 From this command we will be able to see the pods as they come on line.  Notice the steps as they complete. 
 
 ### ✅  Monitor your system
+
 Modern applications and systems require that you can monitor them. K8ssandra is no different and to that end provides us with built-in Grafana and Prometheus.
 
 To find the UI for Grafana and Prometheus use the links page in your instance and click on the corresponding Grafana and Prometheus. 
 
-If running on a local kind cluster navigate to prometheus.localhost:8080 and grafana.localhost:8080 
+![images](./Images/home-grafana.png)
 
-For Grafana the login is
-username: `admin`
-password: `secret`
+If running on a local kind cluster navigate to `prometheus.localhost:8080` and `grafana.localhost:8080` 
+
+For Grafana the credentials are:
+```yaml
+username: admin
+password: secret
+```
 
 # 2. Working with Data
 
