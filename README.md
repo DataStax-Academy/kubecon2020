@@ -26,7 +26,7 @@ Everywhere in this repo you see `<YOURADDRESS>` replace with the URL for the ins
 ```
 If you are doing this on your own using **your own computer** or your own cloud node, please check the requirements and install the missing tools as explained [Here](https://github.com/DataStax-Academy/kubecon2020/blob/main/setup_local.md). You need to have a docker-ready machine with at least a 4-core + 8 GB RAM.
 
-## Table of content and resources
+## Table of contents and resources
 
 * [Workshop On YouTube](https://www.youtube.com/watch?v=DI1bJ1tggmk)
 * [Presentation](https://github.com/DataStax-Academy/kubecon2020/blob/main/November%20KubeCon%20Cassandra%20Kubernetes%20Workshop.pdf)
@@ -343,9 +343,9 @@ For more reading on Reaper visit [this link](https://medium.com/rahasak/orchestr
 # 5. Resources
 Well that is it for today.  In just a short time we have done what would have taken the better part of a week to do in the past thanks to the power of Kubernetes and Helm.
 
-For further learning from our team please checkout [datastax.com/dev](datastax.com/dev) where we keep many resources and hands on labs to help you improve your skill set. 
+For further learning from our team please checkout our developer site [datastax.com/dev](https://www.datastax.com/dev) where we keep many resources and hands on labs to help you improve your skills. The [Kubernetes and Cassandra page](https://www.datastax.com/dev/kubernetes) and the [cloud-native data page](https://www.datastax.com/cloud-native) are both great places to start.   
 
-If you are looking to get certified on Cassandra please visit [https://datastax.com/dev/certifications](https://datastax.com/dev/certifications).
+If you are interested in receiving updates on our new Cassandra on Kubernetes certification program, or becoming a Cassandra certified developer or administrator please visit [https://datastax.com/dev/certifications](https://datastax.com/dev/certifications).
 
 To get involved in the discussion around this project and others please check out [community.datastax.com](community.datastax.com).
 
