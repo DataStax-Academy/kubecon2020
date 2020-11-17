@@ -220,7 +220,7 @@ password: secret
 
 ## 2. Working with Data
 
-**✅ Step 2a: Add Cassandra password to manifest **
+**✅ Step 2a: Add Cassandra password to manifest**
 
 Make sure the Cassandra Operator is initialized by trying to extract the password. If this command returns an error, wait a few seconds and try it again until you see the random password.
 
