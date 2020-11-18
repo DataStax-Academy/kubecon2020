@@ -21,7 +21,7 @@ On Linux
 curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
 chmod +x ./kubectl
 mv ./kubectl /usr/local/bin/kubectl
-curl -Lo ./kind https://github.com/kubernetes-sigs/kind/releases/download/v0.7.0/kind-$(uname)-amd64
+curl -Lo ./kind https://github.com/kubernetes-sigs/kind/releases/download/v0.9.0/kind-$(uname)-amd64
 chmod +x ./kind
 mv ./kind /usr/local/bin/kind
 ```
@@ -51,5 +51,5 @@ git clone https://github.com/DataStax-Academy/kubecon2020/
 ## Start Your Kind Cluster
 ```
 cd kubecon2020
-kind create cluster --image kindest/node:v1.17.11 --config ./kind-config.yaml
+kind create cluster --image kindest/node:v1.19.1 --config ./kind-config.yaml
 ```
