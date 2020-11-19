@@ -43,7 +43,7 @@ If you are doing this on your own using **your own computer** or your own cloud 
 
 ## 1. Setting Up and Monitoring Cassandra
 
-First things first.  Helm [documentation](https://helm.sh/docs/) is kind of like a high powered package manager for Kubernetes. In order to use the packages for todays workshop we will need to first add the correct repositories for helm to use.
+First things first.  [Helm](https://helm.sh/docs/) is kind of like a high powered package manager for Kubernetes. In order to use the packages for todays workshop we will need to first add the correct repositories for helm to use.
 
 We will pull recipies from [https://helm.k8ssandra.io/](https://helm.k8ssandra.io/) where you can find all the documentation.
 
