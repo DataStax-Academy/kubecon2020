@@ -155,7 +155,7 @@ TEST SUITE: None
 **✅ Step 1h: Install a k8ssandra cluster**
 
 ```
-helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set ingress.traefik.enabled=true --set ingress.traefik.repair.host=repair.${ADDRESS} --set ingress.traefik.monitoring.grafana.host=grafana.${ADDRESS} --set ingress.traefik.monitoring.prometheus.host=prometheus.${ADDRESS}
+helm install demo k8ssandra/k8ssandra-cluster -f demo-values.yaml
 ```
 
 >*📃output*
@@ -333,7 +333,7 @@ This is the current number of cassandra nodes.  Next, we are going to scale up t
 While there are a few ways to make this change with Helm, we will use a single line command that doesn't require any edits to files. 
 
 ```
-helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=3 --set ingress.traefik.enabled=true --set ingress.traefik.repair.host=repair.${ADDRESS}  --set ingress.traefik.monitoring.grafana.host=grafana.${ADDRESS}  --set ingress.traefik.monitoring.prometheus.host=prometheus.${ADDRESS}
+helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=3 -f demo-values.yaml
 ```
 
 Check the size again, it should be `size: 3` now
@@ -348,7 +348,7 @@ Historically, one of the most difficult operations with Cassandra has been to sc
 With K8ssandra's dynamic elasticity, it is now just as easy as scaling up.  Let's try it!
 
 ```
-helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=1 --set ingress.traefik.enabled=true --set ingress.traefik.repair.host=repair.${ADDRESS}  --set ingress.traefik.monitoring.grafana.host=grafana.${ADDRESS}  --set ingress.traefik.monitoring.prometheus.host=prometheus.${ADDRESS}
+helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=1 -f demo-values.yaml
 ```
 
 Check the size again, it should be back to `size: 1` now.
