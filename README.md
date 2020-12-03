@@ -231,21 +231,7 @@ Cassandra Node Metrics
 
 ## 2. Working with Data
 
-**✅ Step 2a: Add Cassandra password to manifest **
-
-Make sure the Cassandra Operator is initialized by trying to extract the password. If this command returns an error, wait a few seconds and try it again until you see the random password.
-
-```
-kubectl get secret k8ssandra-superuser -o yaml | grep password | cut -d " " -f4 | base64 -d
-```
-
-Add the Cassandra password to the PetClinic manifest by running the following sed script.
-
-```
-sed -i "s/asdfadsfasdfdasdfds/$(kubectl get secret k8ssandra-superuser -o yaml | grep password | cut -d " " -f4 | base64 -d)/g" petclinic.yaml
-```
-
-**✅ Step 2b: Deploy the PetClinic app by applying the manifest.**
+**✅ Step 2a: Deploy the PetClinic app by applying the manifest.**
 
 ```
 kubectl apply -f petclinic.yaml
@@ -285,7 +271,7 @@ prometheus-k8ssandra-cluster-a-prometheus-k8ssandra-0             2/2     Runnin
 traefik-7877ff76c9-rcm9n                                          1/1     Running     0          27m                                        
 ```
 
-**✅ Step 2c: Using PetClinic**
+**✅ Step 2b: Using PetClinic**
 
 Navigate to the petclinic link in your cloud instance page to interact with the pet clinic app.  If you have done everything correctly you should see the following.
 
