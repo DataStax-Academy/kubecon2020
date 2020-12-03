@@ -21,9 +21,15 @@ spec:
         #args: ["-f", "/dev/null"]
         env:
           - name: CASSANDRA_USER
-            value: "k8ssandra-superuser"
+            valueFrom:
+              secretKeyRef:
+                name: k8ssandra-superuser
+                key: username
           - name: CASSANDRA_PASSWORD
-            value: "asdfadsfasdfdasdfds"
+            valueFrom:
+              secretKeyRef:
+                name: k8ssandra-superuser
+                key: password
           - name: LISTENING_PORT
             value: "9966"
           - name: MONITORING_ENABLED
