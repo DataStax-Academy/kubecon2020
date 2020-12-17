@@ -1,20 +1,13 @@
-name: demo
-clusterName: demo
-size: 3
+name: k8ssandra
+clusterName: k8ssandra
+size: 1
 ingress:
   traefik:
     enabled: true
     repair:
-      host: repair.3.236.112.189.xip.io
+      host: repair.localhost
     monitoring:
       grafana:
-        host: grafana.3.236.112.189.xip.io
+        host: grafana.localhost
       prometheus:
-        host: prometheus.3.236.112.189.xip.io
-backupRestore:
-  medusa:
-    enabled: true
-    bucketName: k8ssandra-medusa-dev
-    bucketSecret: medusa-bucket-key
-    multiTenant: false
-    storage: s3
+        host: prometheus.localhost
