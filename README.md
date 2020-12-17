@@ -155,7 +155,7 @@ TEST SUITE: None
 **✅ Step 1h: Install a k8ssandra cluster**
 
 ```
-helm install demo k8ssandra/k8ssandra-cluster -f demo-values.yaml
+helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster -f demo-values.yaml
 ```
 
 >*📃output*
