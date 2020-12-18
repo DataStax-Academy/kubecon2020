@@ -309,7 +309,7 @@ PetClinic应用程序的原始代码可以在[以下Github代码库](https://git
 helm get manifest k8ssandra-cluster-a
 ```
 
-请注意上面的命令返回和当前运行环境相关的所有 yaml 文件（有很多）。K8s中包含了许多的 yaml 文件. 
+请留意上面的命令所返回的信息以及与当前运行环境相关的所有 yaml 文件（有很多）。K8s中包含了许多的 yaml 文件。
 
 **✅ 步骤 3b: Cassandra集群向上扩容**
 
