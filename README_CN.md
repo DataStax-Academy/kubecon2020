@@ -1,6 +1,6 @@
 # KubeCon 2020
 
-## Kubernetes (K8s) 之上的 Apache Cassandra 自动化管理
+## 在Kubernetes (K8s) 之上的 Apache Cassandra 自动化管理
 
 以下这个代码/资料库中，有所有关于这次实操课程的所有资料 （敬请加入浏览器便签）：
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/banner.png?raw=true)
@@ -24,7 +24,7 @@
 + 本机环境
 ```
 
-如果你打算使用**自己的环境**（自己的笔记本或云端环境），请确保满足运行此次演示的要求和预装所需软件（需求参考[Here](https://github.com/DataStax-Academy/kubecon2020/blob/main/setup_local.md)）。你的环境必须能运行docker，而且保证至少4核的CPU和8G的内存分配给docker运行环境。
+如果你打算使用**自己的环境**（自己的笔记本或自己的云上主机），请确保满足运行此次演示的要求和预装所需软件（需求参考[Here](https://github.com/DataStax-Academy/kubecon2020/blob/main/setup_local.md)）。你的环境必须能运行docker，而且保证至少2核的CPU和8G的内存分配给docker运行环境，土豪上不封顶。
 
 
 ## 目录和资料
@@ -36,9 +36,9 @@
 
 | 主题 | 说明
 |---|---|
-| **1 - 建立和监控Cassandra集群** | [使用说明](#1-Setting-up-and-Monitoring-Cassandra)  |
+| **1 - 搭建并监控Cassandra集群** | [使用说明](#1-Setting-up-and-Monitoring-Cassandra)  |
 | **2 - 访问和使用数据** | [使用说明](#2-Working-with-data)  |
-| **3 - Cassandra集群向上扩容和向下缩容** | [使用说明](#3-Scaling-up-and-down)  |
+| **3 - 集群伸缩** | [使用说明](#3-Scaling-up-and-down)  |
 | **4 - 运行Cassandra集群数据一致性修复操作** | [使用说明](#4-Running-repairs)  |
 | **5 - 相关资源** | [使用说明](#5-Resources)  |
 
