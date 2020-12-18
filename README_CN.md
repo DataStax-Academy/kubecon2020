@@ -54,10 +54,30 @@
 Username: ec2-user
 password: datastax
 ```
-
 ![images](./Images/home-shell.png)
 
-**✅ 步骤 1b: 加入 K8ssandra `Helm` 资料库** 
+**✅ 步骤 1b: 确认当前目录是~/kubernetes-workshop-online，并运行git pull** 
+
+```bash
+git pull
+```
+
+*📃output*
+```bash
+ec2-user@ip-172-31-5-5:~/kubernetes-workshop-online> git pull
+From https://github.com/DataStax-Academy/kubecon2020
+ * branch            main       -> FETCH_HEAD
+Updating 72709d8..994a81d
+Fast-forward
+ README.md        | 24 +++++-------------------
+ demo-values.yaml | 13 +++++++++++++
+ petclinic.yaml   | 10 ++++++++--
+ setup_local.md   |  4 ++--
+ 4 files changed, 28 insertions(+), 23 deletions(-)
+ create mode 100644 demo-values.yaml     
+```
+
+**✅ 步骤 1c: 加入 K8ssandra `Helm` 资料库** 
 
 ```bash
 helm repo add k8ssandra https://helm.k8ssandra.io/
@@ -67,20 +87,6 @@ helm repo add k8ssandra https://helm.k8ssandra.io/
 ```bash
 ec2-user@ip-172-31-5-5:~/kubernetes-workshop-online> helm repo add k8ssandra https://helm.k8ssandra.io/
 "k8ssandra" has been added to your repositories      
-```
-
-**✅ 步骤 1c: 更新 `Helm`** 
-
-```bash
-helm repo update
-```
-
-*📃output*
-```
-ec2-user@ip-172-31-5-5:~/kubernetes-workshop-online> helm repo update
-Hang tight while we grab the latest from your chart repositories...                                                                                              
-...Successfully got an update from the "k8ssandra" chart repository                                                                                              
-Update Complete. ⎈Happy Helming!⎈                    
 ```
 
 **✅ 步骤 1d: 加入 Traefik `Helm` 资料库** 
@@ -98,7 +104,7 @@ ec2-user@ip-172-31-5-5:~/kubernetes-workshop-online> helm repo add traefik https
 "traefik" has been added to your repositories  
 ```
 
-**✅ 步骤 1e: （再次）更新 `Helm`**
+**✅ 步骤 1e: 更新 `Helm`**
 
 ```bash
 helm repo update
@@ -158,9 +164,7 @@ helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster -f demo-values.yaml
 
 >*📃output*
 ```
-ec2-user@ip-172-31-5-5:~/kubernetes-workshop-online> helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set ingress.traefik.enabled=true --set in
-gress.traefik.repair.host=repair.${ADDRESS} --set ingress.traefik.monitoring.grafana.host=grafana.${ADDRESS} --set ingress.traefik.monitoring.prometheus.host
-=prometheus.${ADDRESS}                                                                                                                                       
+ec2-user@ip-172-31-5-5:~/kubernetes-workshop-online> helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster -f demo-values.yaml                                                                                                                                       
 NAME: k8ssandra-cluster-a                                                                                                                                    
 LAST DEPLOYED: Tue Nov 17 15:04:56 2020                                                                                                                      
 NAMESPACE: default                                                                                                                                           
@@ -202,9 +206,9 @@ traefik-7877ff76c9-hpb97                                          1/1     Runnin
 
 **✅ 步骤 1i: 监控你的系统**
 
-现代的应用程序和系统需要确保你能争取的监控它们，K8ssandra 也不例外。K8ssandra 提供内置的Grafana 和 Prometheus 组件来提供系统监控功能。
+现代的应用程序和系统需要确保你能正确的监控它们，K8ssandra 也不例外。K8ssandra 提供内置的Grafana 和 Prometheus 组件来提供系统监控功能。
 
-如果你使用的是提供的云环境，从云环境首页上点击香型的 Grafana 或 Prometheus链接进入相应的监控组件页面。
+如果你使用的是我们提供的云环境，从云环境首页上点击相应的 Grafana 或 Prometheus链接进入相应的监控组件页面。
 
 如果你用的是自己的本地 “kind” 集群环境， 在本地浏览器中输入以下地址 `prometheus.localhost:8080` 或 `grafana.localhost:8080` 来访问相应的监控组件页面。
 
@@ -228,7 +232,7 @@ Cassandra Cluster Condenses
 Cassandra Node Metrics
 ![images](./Images/grafana-4.png)
 
-## 2. 访问和使用数据
+## 2. 数据操作
 
 **✅ 步骤 2a: 部署 PetClinic 应用程序**
 
@@ -394,7 +398,7 @@ Cassandra 集群数据一致性修复操作是 Cassandra 集群运维管理中�
 
 如果想进一步和我们团队学习，敬请关注[datastax.com/dev](datastax.com/dev)页面。我们在这个页面上会发布很多可以帮助你们继续学习和提高的资源。
 
-如果你想成为 Cassandra 认真管理员或开发者, 敬请关注[https://datastax.com/dev/certifications](https://datastax.com/dev/certifications)页面。
+如果你想成为 Cassandra 认证管理员或开发者, 敬请关注[https://datastax.com/dev/certifications](https://datastax.com/dev/certifications)页面。
 
 如果你想参与到关于这个项目和其他一些项目的讨论，敬请关注[community.datastax.com](community.datastax.com)页面。
 
