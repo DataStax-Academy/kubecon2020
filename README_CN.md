@@ -2,8 +2,8 @@
 
 ## 在Kubernetes (K8s) 之上的 Apache Cassandra 自动化管理
 
-以下这个代码/资料库中，有所有关于这次实操课程的所有资料 （敬请加入浏览器书签）：
-![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/banner.png?raw=true)
+以下这个代码/资料库中，有所有关于这次实操课程的所有资料 （请记得在本页添加书签，以便日后查阅浏览）：
+![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/banner.png?raw=true { width: 200px; })
 
 ## 开始之前
 
@@ -360,7 +360,7 @@ Cassandra集群针对数据一致性的修复操作是Cassandra集群运维管�
 
 ![images](./Images/home-repear.png)
 
-如果你使用得是自己的本地环境，在浏览器中输入 repair.localhost:8080/webui/ 来打开Reaper的网页。
+如果你使用的是自己的本地环境，在浏览器中输入 repair.localhost:8080/webui/ 来打开Reaper的网页。
 
 注意在Reaper页面上Cassandra节点是以集群 datacenter来显示的。
 
@@ -382,7 +382,7 @@ Cassandra集群针对数据一致性的修复操作是Cassandra集群运维管�
 
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/reaper4.png?raw=true)
 
-注意到有一个新的数据一致性修复任务加到了数据列表中。
+这时会看到有一个新的数据一致性修复任务加到了数据列表中。
 
 **✅ 步骤 4c:Run a cluster repair**
 
@@ -390,18 +390,20 @@ Cassandra集群针对数据一致性的修复操作是Cassandra集群运维管�
 
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/reaper5.png?raw=true)
 
-注意到数据修复任务已经开始运行。
+这时会看到数据修复任务已经开始运行。
 
-想要了解更多关于Reaper的知识，请参考[以下页面](https://medium.com/rahasak/orchestrate-repairs-with-cassandra-reaper-26094bdb59f6)
+想要了解更多关于Reaper的知识，请参考[本页面](https://medium.com/rahasak/orchestrate-repairs-with-cassandra-reaper-26094bdb59f6)
 
 ## 5. 相关资源
 
 好的，今天就到此为止。由于Kubernetes和Helm技术的帮助，我们在短短的一段时间内完成了以前需要一周左右时间才能完成的工作。
 
-如果想进一步和我们团队学习，敬请关注[datastax.com/dev](datastax.com/dev)页面。我们在这个页面上会发布很多可以帮助你们继续学习和提高的资源。
+如果想了解DataStax和Cassandra中文社区的最新动态，请关注我们的[公众号]()。
 
-如果你想成为Cassandra认证管理员或开发者, 敬请关注[https://datastax.com/dev/certifications](https://datastax.com/dev/certifications)页面。
+如果想进一步学习，我们团队提供了很多学习资源，请访问[datastax.com/dev](datastax.com/dev)页面。除了目前已有的资源，我们会不断更新更多的内容，帮助你继续学习和提高。
 
-如果你想参与到关于这个项目和其他一些项目的讨论，敬请关注[community.datastax.com](community.datastax.com)页面。
+如果你想成为Cassandra认证管理员或开发者, 请见[datastax.com/dev/certifications](https://datastax.com/dev/certifications)页面。
 
-如果你想更多的了解K8ssandra, 敬请关注[k8ssandra.io/preview](k8ssandra.io/preview)页面，还有项目的Github资料库：[github.com/k8ssandra/k8ssandra](github.com/k8ssandra/k8ssandra)。
+如果你想参与到关于这个项目和其他一些项目的讨论，请见[community.datastax.com](community.datastax.com)页面。
+
+如果你想更多的了解K8ssandra, 请见[k8ssandra.io/preview](k8ssandra.io/preview)页面，还有项目的Github资料库：[github.com/k8ssandra/k8ssandra](github.com/k8ssandra/k8ssandra)。
