@@ -30,17 +30,17 @@
 ## 目录和资料
 
 * [YouTube录像](https://www.youtube.com/watch?v=DI1bJ1tggmk)
-* [演示文件](https://github.com/DataStax-Academy/kubecon2020/blob/main/November%20KubeCon%20Cassandra%20Kubernetes%20Workshop.pdf)
-* [Discord 聊天](https://bit.ly/cassandra-workshop)
+* [PPT文件](https://github.com/DataStax-Academy/kubecon2020/blob/main/November%20KubeCon%20Cassandra%20Kubernetes%20Workshop.pdf)
+* [微信学习群(让小秘书拉你入群)](http://cn.hk.uy/3ds)
 * [问答: community.datastax.com](https://community.datastax.com)
 
 | 主题 | 说明
 |---|---|
-| **1 - 搭建并监控Cassandra集群** | [使用说明](#1-Setting-up-and-Monitoring-Cassandra)  |
-| **2 - 访问和使用数据** | [使用说明](#2-Working-with-data)  |
-| **3 - 集群伸缩** | [使用说明](#3-Scaling-up-and-down)  |
-| **4 - 运行Cassandra集群数据一致性修复操作** | [使用说明](#4-Running-repairs)  |
-| **5 - 相关资源** | [使用说明](#5-Resources)  |
+| **1 - 搭建并监控Cassandra集群** | [使用说明](#1-建立和监控Cassandra集群)  |
+| **2 - 访问和使用数据** | [使用说明](#2-访问和使用数据)  |
+| **3 - 集群伸缩** | [使用说明](#3-集群伸缩)  |
+| **4 - 运行Cassandra集群数据一致性修复操作** | [使用说明](#4-运行集群数据一致性修复操作)  |
+| **5 - 相关资源** | [使用说明](#5-相关资源)  |
 
 ## 1. 建立和监控Cassandra集群
 
@@ -232,7 +232,7 @@ Cassandra Cluster Condenses
 Cassandra Node Metrics
 ![images](./Images/grafana-4.png)
 
-## 2. 数据操作
+## 2. 访问和使用数据
 
 **✅ 步骤 2a: 部署 PetClinic 应用程序**
 
@@ -295,7 +295,7 @@ traefik-7877ff76c9-rcm9n                                          1/1     Runnin
 
 PetClinic 应用程序的原始代码可以在以下 Github 代码库找到： [这里](https://github.com/spring-petclinic/spring-petclinic-reactive). 在今天的实操演示课程里，我们使用的是自己的分叉版本。 
 
-## 3. Cassandra集群向上扩容和向下缩容
+## 3. 集群伸缩
 
 **✅ 步骤 3a: 获取当前运行环境的基本配置**
 
@@ -348,7 +348,7 @@ helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=1 -f dem
 helm get manifest k8ssandra-cluster-a | grep size -m 1
 ```
 
-## 4. 运行Cassandra集群数据一致性修复操作
+## 4. 运行集群数据一致性修复操作
 
 Cassandra 集群数据一致性修复操作是 Cassandra 集群运维管理中一个很重要的操作。过去很长时间中，关于怎样进行这项操作有很多不同的，独立于 Cassandra 安装之外的一些定制化的解决方案。如今在 K8ssandra 解决方案中, 它就自带了一个关于数据一致性修复操作的组件；这样就避免了引入定制化解决方案的必要。这个组件叫做 Reaper，它的存在使 K8ssandra Cassandra 集群数据一致性修复操作变得简单了许多。
 
