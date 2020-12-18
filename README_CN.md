@@ -338,7 +338,7 @@ helm get manifest k8ssandra-cluster-a | grep size -m 1
 
 从Cassandra历史上来讲，一个非常困难的课题就是Cassandra集群向下缩容。 
 
-现在由于K8ssandra的动态弹性特征，这个问题已经大大简化来。Cassandra集群向下缩容和集群向上扩容变得一样轻松。让我们一起来试一下！
+现在由于K8ssandra的动态弹性特征，这个问题已经大大简化了。Cassandra集群向下缩容和向上扩容变得一样轻松。让我们一起来试一下！
 
 ```
 helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=1 -f demo-values.yaml
@@ -352,7 +352,7 @@ helm get manifest k8ssandra-cluster-a | grep size -m 1
 
 ## 4. 运行集群数据一致性修复操作
 
-Cassandra集群数据一致性修复操作是Cassandra集群运维管理中一个很重要的操作。过去很长时间中，关于怎样进行这项操作有很多不同的，独立于Cassandra安装之外的一些定制化的解决方案。如今在K8ssandra解决方案中, 它就自带了一个关于数据一致性修复操作的组件；这样就避免了引入定制化解决方案的必要。这个组件叫做Reaper，它的存在使K8ssandra Cassandra集群数据一致性修复操作变得简单了许多。
+Cassandra集群针对数据一致性的修复操作是Cassandra集群运维管理中的一个很重要的操作。过去很长时间中，关于怎样进行这项操作有很多不同的、独立于Cassandra安装之外的一些定制化的解决方案。如今在K8ssandra解决方案中, 它就自带了一个关于数据一致性修复操作的组件；这样就避免了引入定制化解决方案的必要。这个组件叫做Reaper，它的存在使K8ssandra Cassandra集群数据一致性修复操作变得简单了许多。
 
 **✅ 步骤 4a: 检查集群的健康状态**
 
