@@ -159,6 +159,8 @@ TEST SUITE: None
 **✅ 步骤 1h: 用 Helm 来安装 K8ssandra 集群**
 
 ```
+export ADDRESS=<ADDRESS>
+sed -i -e 's/localhost/'${ADDRESS}'/' demo-values.yaml
 helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster -f demo-values.yaml
 ```
 
