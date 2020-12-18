@@ -295,7 +295,7 @@ traefik-7877ff76c9-rcm9n                                          1/1     Runnin
 *点击 _delete_ 按钮。*
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/petclinic5.png?raw=true)
 
-PetClinic应用程序的原始代码可以在以下Github代码库找到： [这里](https://github.com/spring-petclinic/spring-petclinic-reactive). 在今天的实操演示课程里，我们使用的是自己的分叉版本。 
+PetClinic应用程序的原始代码可以在[以下Github代码库](https://github.com/spring-petclinic/spring-petclinic-reactive)找到。在今天的实操演示课程里，我们使用的是自己的分叉版本。 
 
 ## 3. 集群伸缩
 
@@ -303,7 +303,7 @@ PetClinic应用程序的原始代码可以在以下Github代码库找到： [这
 
 对一些基本的配置选项，你可以通过改变 `demo-values.yaml` 文件的方式来实现。在下面的步骤中，我们用这种方法来实现集群的扩容和缩容。
 
-运行以下的命令来查看当前运行环境的所有配置设定。
+运行以下命令来查看当前运行环境的所有配置设定。
 
 ```
 helm get manifest k8ssandra-cluster-a
