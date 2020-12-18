@@ -158,14 +158,14 @@ TEST SUITE: None
 
 **✅ 步骤 1h: 用 Helm 来安装 K8ssandra 集群**
 
-```
-export ADDRESS=<ADDRESS>
-sed -i -e 's/localhost/'${ADDRESS}'/' demo-values.yaml
+```bash
+export ADDRESS=<提供给你的云环境地址>; 
+sed -i -e 's/localhost/'${ADDRESS}'/' demo-values.yaml; 
 helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster -f demo-values.yaml
 ```
 
 >*📃output*
-```
+```bash
 ec2-user@ip-172-31-5-5:~/kubernetes-workshop-online> helm install k8ssandra-cluster-a k8ssandra/k8ssandra-cluster -f demo-values.yaml                                                                                                                                       
 NAME: k8ssandra-cluster-a                                                                                                                                    
 LAST DEPLOYED: Tue Nov 17 15:04:56 2020                                                                                                                      
@@ -378,7 +378,14 @@ Cassandra集群针对数据一致性的修复操作是Cassandra集群运维管�
 
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/reaper3.png?raw=true)
 
-点击 _add schedule_；填入所需详细信息；完成后点击 _add schedule_ 来激活新的自动调度任务。Cassandra推荐每星期完成一个数据修复循环；这样做可以防止“僵尸数据”在被删除后重新出现。
+点击 _add schedule_；填入所需详细信息：
+* Cluster: k8ssandra (自动填入)
+* Keyspace: spring_petclinic
+* Owner: datastax
+* Start time：当前系统时间（自动填入）
+* Internval in days: 7
+
+完成后点击 _add schedule_ 来激活新的自动调度任务。Cassandra推荐每星期完成一个数据修复循环；这样做可以防止“僵尸数据”在被删除后重新出现。
 
 ![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/reaper4.png?raw=true)
 
