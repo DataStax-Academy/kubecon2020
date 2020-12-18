@@ -392,18 +392,18 @@ Cassandra集群针对数据一致性的修复操作是Cassandra集群运维管�
 
 这时会看到数据修复任务已经开始运行。
 
-想要了解更多关于Reaper的知识，请参考[本页面](https://medium.com/rahasak/orchestrate-repairs-with-cassandra-reaper-26094bdb59f6)
+想要了解更多关于Reaper的知识，请参考[本页面](https://medium.com/rahasak/orchestrate-repairs-with-cassandra-reaper-26094bdb59f6)。
 
 ## 5. 相关资源
 
 好的，今天就到此为止。由于Kubernetes和Helm技术的帮助，我们在短短的一段时间内完成了以前需要一周左右时间才能完成的工作。
 
-如果想了解DataStax和Cassandra中文社区的最新动态，请关注我们的[公众号]()。
+如果想了解DataStax和Cassandra中文社区的最新动态，请关注我们的[公众号](https://sslprod.oss-cn-shanghai.aliyuncs.com/stable/events/335/image_qrcode.jpg)。
 
-如果想进一步学习，我们团队提供了很多学习资源，请访问[datastax.com/dev](datastax.com/dev)页面。除了目前已有的资源，我们会不断更新更多的内容，帮助你继续学习和提高。
+如果想进一步学习，我们团队提供了很多学习资源，请访问[datastax.com/dev](https://datastax.com/dev)页面。除了目前已有的资源，我们会不断更新更多的内容，帮助你继续学习和提高。
 
 如果你想成为Cassandra认证管理员或开发者, 请见[datastax.com/dev/certifications](https://datastax.com/dev/certifications)页面。
 
-如果你想参与到关于这个项目和其他一些项目的讨论，请见[community.datastax.com](community.datastax.com)页面。
+如果你想参与到关于这个项目和其他一些项目的讨论，请见[community.datastax.com](https://community.datastax.com)页面。
 
-如果你想更多的了解K8ssandra, 请见[k8ssandra.io/preview](k8ssandra.io/preview)页面，还有项目的Github资料库：[github.com/k8ssandra/k8ssandra](github.com/k8ssandra/k8ssandra)。
+如果你想更多的了解K8ssandra, 请见[k8ssandra.io/preview](https://k8ssandra.io/preview)页面，还有项目的Github资料库：[github.com/k8ssandra/k8ssandra](https://github.com/k8ssandra/k8ssandra)。
