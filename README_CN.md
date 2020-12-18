@@ -322,7 +322,7 @@ helm get manifest k8ssandra-cluster-a | grep size -m 1
 
 这就是当前运营环境中Cassandra节点的数目。下一步，我们会把集群中Cassandra节点的数目由 1 扩容到 3。
 
-有好几种方法可以实现这个目标。在这里我们使用以下的方法（一条命令行，不需要编辑任何配置文件）。
+有好几种方法可以实现这个目标。在这里我们使用以下的方法（仅需一行命令，无需编辑任何配置文件）。
 
 ```
 helm upgrade k8ssandra-cluster-a k8ssandra/k8ssandra-cluster --set size=3 -f demo-values.yaml
