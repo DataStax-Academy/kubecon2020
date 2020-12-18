@@ -3,7 +3,7 @@
 ## 在Kubernetes (K8s) 之上的 Apache Cassandra 自动化管理
 
 以下这个代码/资料库中，有所有关于这次实操课程的所有资料 （请记得在本页添加书签，以便日后查阅浏览）：
-![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/banner.png?raw=true { width: 200px; })
+![OK](https://github.com/DataStax-Academy/kubecon2020/blob/main/Images/banner.png?raw=true)
 
 ## 开始之前
 
