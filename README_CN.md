@@ -36,13 +36,13 @@
 
 | 主题 | 说明
 |---|---|
-| **1 - 搭建并监控Cassandra集群** | [使用说明](#1-建立和监控Cassandra集群)  |
+| **1 - 搭建并监控Cassandra集群** | [使用说明](#1-搭建并监控Cassandra集群)  |
 | **2 - 访问和使用数据** | [使用说明](#2-访问和使用数据)  |
 | **3 - 集群伸缩** | [使用说明](#3-集群伸缩)  |
 | **4 - 运行Cassandra集群数据一致性修复操作** | [使用说明](#4-运行集群数据一致性修复操作)  |
 | **5 - 相关资源** | [使用说明](#5-相关资源)  |
 
-## 1. 建立和监控Cassandra集群
+## 1. 搭建并监控Cassandra集群
 
 首先，Helm [官方文档](https://helm.sh/docs/) 相当于是Kubernetes中的“软件包”管理程序。在今天的实操课程中，我们会用相关的Helm资料库（K8ssandra）来进行Cassandra集群的建立，监控和运维工作。有关k8ssandra Helm 资料库的详情，请参考这里：[https://helm.k8ssandra.io/](https://helm.k8ssandra.io/)。
 
