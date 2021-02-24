@@ -138,7 +138,7 @@ TEST SUITE: None
 Lets install our Cassandra by running a helm install of K8ssandra. The long install command will be shortened down post release candidate as it will no longer need the ingress config specified. Start tools installation. It can take about 30s without log to install.
 
 ```bash
-helm install k8ssandra-tools k8ssandra/k8ssandra
+helm install k8ssandra-cluster-a k8ssandra/k8ssandra
 ```
 
 >*📃output*
